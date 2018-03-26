@@ -1,7 +1,7 @@
 package edu.wyu.service;
 
 import edu.wyu.dao.UserDao;
-import edu.wyu.domain.User;
+import edu.wyu.domain.UserEntity;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -22,28 +22,31 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> list(){
+    public List<UserEntity> list(){
         return userDao.list();
     }
 
-    public User register(String phone,String password){
+    public boolean register(UserEntity user){
 
         //TODO VALIDATE PHONE AND PASSWORD
-        if (userDao.checkPhone(phone)){
+        if (userDao.checkPhoneExist(user.getPhone())){
 
-           return null; //failed
+           return false; //failed
         }
-        User user = new User(phone,password);
         userDao.register(user);
 
-        return user;
+        return true;
     }
 
-    public User login(String phone,String password){
+    public UserEntity login(String phone,String password){
         return userDao.login(phone,password);
     }
 
-    public User editPassword(String phone,String password){
+    public UserEntity editPassword(String phone,String password){
         return userDao.editPassword(phone,password);
+    }
+
+    public boolean checkPhoneExist(String phone){
+        return userDao.checkPhoneExist(phone);
     }
 }

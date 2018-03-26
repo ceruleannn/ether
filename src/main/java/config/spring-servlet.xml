@@ -21,14 +21,15 @@
 		<!--</property>-->
 		<!--<property name="order" value="-1"/>-->
 	<!--</bean>-->
+
 	<!--<bean id="dataInitListener" class="com.sammy.web.listener.DataInitListener"></bean>-->
-	<!--<mvc:resources location="/menu/js/" mapping="/menu/js/**" />-->
+
 	<!--<mvc:resources location="/menu/css/" mapping="/menu/css/**" />-->
 	<!--<mvc:resources location="/menu/images/" mapping="/menu/images/**" />-->
-	<!--<mvc:resources location="/ui/js/" mapping="/ui/js/**" />-->
-	<!--<mvc:resources location="/ui/css/" mapping="/ui/css/**" />-->
-	<!--<mvc:resources location="/ui/images/" mapping="/ui/images/**" />-->
-	<!--<mvc:resources location="/temp/" mapping="/temp/**" />-->
+	<mvc:resources location="/ui/js/" mapping="/ui/js/**" />
+	<mvc:resources location="/ui/css/" mapping="/ui/css/**" />
+	<mvc:resources location="/ui/images/" mapping="/ui/images/**" />
+	<mvc:resources location="/ui/fonts/" mapping="/ui/fonts/**" />
 	<!--<mvc:resources location="/photo/" mapping="/photo/**" />-->
 	<!--<mvc:resources location="/print_plugin/" mapping="/print_plugin/**" />-->
 	<!-- 开启注解 -->

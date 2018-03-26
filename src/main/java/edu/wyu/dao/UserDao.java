@@ -1,17 +1,15 @@
 package edu.wyu.dao;
 
-import edu.wyu.domain.User;
-import org.junit.jupiter.api.Test;
+import edu.wyu.domain.UserEntity;
 import org.springframework.stereotype.Repository;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 @Repository("UserDao")
-public class UserDao extends BaseDao<User>{
+public class UserDao extends BaseDao<UserEntity>{
 
-    public List<User> list() {
-        String hql = "from User ";
+    public List<UserEntity> list() {
+        String hql = "from UserEntity ";
 
         return this.list(hql, null);
     }
@@ -22,10 +20,11 @@ public class UserDao extends BaseDao<User>{
      * @param password
      * @return the user that login successfully or null if failed
      */
-    public User login(String phone, String password){
-        String hql = "from User where phone = ? and password = ?";
+    public UserEntity login(String phone, String password){
+        String hql = "from UserEntity where phone = ? and password = ?";
 
-        return this.list(hql, phone, password).get(0);
+        List<UserEntity> list = this.list(hql, phone, password);
+        return list.size()==0?null:list.get(0);
     }
 
     /**
@@ -33,26 +32,29 @@ public class UserDao extends BaseDao<User>{
      * @param phone
      * @return true if exist
      */
-    public boolean checkPhone(String phone){
-        String hql = "from User where phone = ? ";
+    public boolean checkPhoneExist(String phone){
+        String hql = "from UserEntity where phone = ? ";
         int size = list(hql,phone).size();
         return size>0;
     }
 
-    public void register(User user){
+    public void register(UserEntity user){
         this.add(user);
     }
 
-    public User editPassword(String phone , String password){
-        User user = queryUserByPhone(phone);
+    public UserEntity editPassword(String phone , String password){
+        UserEntity user = queryUserByPhone(phone);
+        if (user==null){
+            return null;
+        }
         user.setPassword(password);
         this.update(user);
         return user;
     }
 
-    public User queryUserByPhone(String phone){
-        String hql = "from User where phone = ? ";
-        List<User> users = this.list(hql,phone);
+    public UserEntity queryUserByPhone(String phone){
+        String hql = "from UserEntity where phone = ? ";
+        List<UserEntity> users = this.list(hql,phone);
         if (users.size()==1){
             return users.get(0);
         }

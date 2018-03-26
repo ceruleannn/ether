@@ -1,13 +1,15 @@
 package edu.wyu.web.controller;
 
-import edu.wyu.domain.User;
+import edu.wyu.domain.UserEntity;
 import edu.wyu.service.UserService;
+import edu.wyu.util.StringUtils;
+import edu.wyu.web.util.SmsUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -28,38 +30,123 @@ public class UserController {
 
     @RequestMapping("/list.do")
     public String list(HttpServletRequest request){
-        List<User> users = userService.list();
-        for (User user : users) {
-            System.out.println(user.getPhone());
+        List<UserEntity> users = userService.list();
+        for (UserEntity user : users) {
+            System.out.println(user.getUsername());
         }
         return "/haha";
+    }
+
+    @RequestMapping("/sign")
+    public String sign(HttpServletRequest request){
+        return "/register";
     }
 
     @RequestMapping("/sign.do")
-    public String sign(HttpServletRequest request){
-        userService.register("13522222222","166666");
-        return "/haha";
+    @ResponseBody
+    public String signDo(HttpServletRequest request){
+        String result = checkCode(request);
+        if (result==null){
+            return result;
+        }
+
+        UserEntity user = new UserEntity();
+        user.setUsername(request.getParameter("username"));
+        user.setPhone(request.getParameter("phone"));
+        user.setPassword(request.getParameter("password"));
+
+        if (!userService.register(user)){
+            return "{\"code\":\"300\"}";
+        }
+
+        request.getSession().removeAttribute("code");
+        request.getSession().setAttribute("user",user);
+        return "{\"code\":\"200\"}";
+    }
+
+
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request){
+        return "/login";
     }
 
     @RequestMapping("/login.do")
-    public String login(HttpServletRequest request){
-        User user = userService.login("13522222222","166666");
+    @ResponseBody
+    public String loginDo(HttpServletRequest request){
+        UserEntity user = userService.login(request.getParameter("phone"),request.getParameter("password"));
 
         if (user==null){
-            System.out.println("登陆失败");
+            return "{\"code\":\"400\"}";
         }
         else {
             request.getSession().setAttribute("user",user);
-            System.out.println("登陆成功");
+            return "{\"code\":\"200\"}";
         }
+    }
 
-        return "/haha";
+    @RequestMapping("/edit")
+    public String edit(HttpServletRequest request){
+
+        return "/edit";
     }
 
     @RequestMapping("/edit.do")
-    public String edit(HttpServletRequest request){
-        userService.editPassword("13522222222","aaaaaa");
+    @ResponseBody
+    public String editDo(HttpServletRequest request){
 
-        return "/haha";
+        String result = checkCode(request);
+        if (result!=null){
+            return result;
+        }
+
+        UserEntity user = userService.editPassword(request.getParameter("phone"),request.getParameter("password"));
+
+        if (user==null){
+            return "{\"code\":\"400\"}";
+        }
+
+        request.getSession().removeAttribute("code");
+        request.getSession().setAttribute("user",user);
+        return "{\"code\":\"200\"}";
+    }
+
+    @RequestMapping("/sms")
+    @ResponseBody
+    public String sms(HttpServletRequest request){
+        String phone = request.getParameter("phone");
+        String action = request.getParameter("action");
+
+        //无效的手机
+        if (!StringUtils.validatePhoneValid(phone.trim())){
+            return "{\"code\":\"400\"}";
+        }
+
+        boolean isExist = userService.checkPhoneExist(phone);
+
+        //存在+修改 / 不存在+注册
+        if ((isExist&&"edit".equals(action))||(!isExist)&&"register".equals(action)){
+            String code = SmsUtils.send(phone);
+            request.getSession().setAttribute("code",code);
+            return  "{\"code\":\"200\"}";
+        }else{
+            return "{\"code\":\"400\"}";
+        }
+
+    }
+
+    private String checkCode(HttpServletRequest request){
+        String paramCode = request.getParameter("code");
+        if (paramCode==null){
+            return "/404";
+        }
+
+        String sessionCode = (String) request.getSession().getAttribute("code");
+
+        if (!paramCode.equals(sessionCode)){
+            return "{\"code\":\"400\"}";
+        }
+
+        return null;
+
     }
 }

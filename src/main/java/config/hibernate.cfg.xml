@@ -4,7 +4,10 @@
 
 <hibernate-configuration>
     <session-factory>
-    	<mapping resource="config/User.hbm.xml"/>
+        <property name="connection.url">jdbc:mysql://localhost:3306/os</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping class="edu.wyu.domain.UserEntity"/>
+        <mapping resource="edu/wyu/domain/UserEntity.hbm.xml"/>
 
-     </session-factory>
+    </session-factory>
 </hibernate-configuration>
