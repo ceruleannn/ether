@@ -18,7 +18,7 @@ import java.util.List;
  *
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/u")
 public class UserController {
 
     private UserService userService;
@@ -139,6 +139,7 @@ public class UserController {
         if (paramCode==null){
             return "/404";
         }
+
 
         String sessionCode = (String) request.getSession().getAttribute("code");
 

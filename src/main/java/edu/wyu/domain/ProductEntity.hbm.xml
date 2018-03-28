@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="edu.wyu.domain.ProductEntity" table="product" schema="os">
+        <id name="pid" column="pid"/>
+        <property name="ison" column="ison"/>
+        <property name="date" column="date"/>
+        <property name="pic3" column="pic3"/>
+        <property name="pic2" column="pic2"/>
+        <property name="pic1" column="pic1"/>
+        <property name="detail3" column="detail3"/>
+        <property name="detail2" column="detail2"/>
+        <property name="detail1" column="detail1"/>
+        <property name="overview" column="overview"/>
+        <property name="price" column="price"/>
+        <property name="name2" column="name2"/>
+        <property name="name" column="name"/>
+        <property name="sales" column="sales"/>
+        <many-to-one name="brand" class="edu.wyu.domain.SysBrandEntity"/>
+        <many-to-one name="type" class="edu.wyu.domain.SysTypeEntity"/>
+    </class>
+</hibernate-mapping>
