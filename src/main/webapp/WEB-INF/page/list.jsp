@@ -20,7 +20,7 @@
     <script src="../../ui/js/jquery.min.js"></script>
 
     <!--<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />-->
-    <link href="../../ui/css/style5.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../ui/css/build.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
@@ -127,7 +127,7 @@
                         <div class="mid-1">
                             <div class="women">
                                 <div class="women-top">
-                                    <span>${product.brand}</span>
+                                    <span>${product.brand.name}</span>
                                     <h6><a href="single.html">${product.name}</a></h6>
                                 </div>
                                 <div class="img item_add">
@@ -165,26 +165,47 @@
 
                     <div class="col col-4">
 
+
                         <div class="checkbox checkbox-success">
-                            <input type="radio" name="radio4" id="radio9" value="option3">
+                            <input type="radio" name="order" id="radio9" value="sales">
                             <label for="radio9">
-                                按销量排序
+                                按销量升序
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-success">
-                            <input type="radio" name="radio4" id="radio10" value="option3">
+                            <input type="radio" name="order" id="radio10" value="sales2">
                             <label for="radio10">
-                                按价格排序
+                                按销量降序
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-success">
-                            <input type="radio" name="radio4" id="radio8" value="option2" checked>
-                            <label for="radio8">
-                                按时间排序
+                            <input type="radio" name="order" id="radio11" value="price">
+                            <label for="radio11">
+                                按价格升序
                             </label>
                         </div>
+                        <div class="checkbox checkbox-success">
+                            <input type="radio" name="order" id="radio12" value="price2">
+                            <label for="radio12">
+                                按价格降序
+                            </label>
+                        </div>
+
+                        <div class="checkbox checkbox-success">
+                            <input type="radio" name="order" id="radio13" value="time" checked>
+                            <label for="radio13">
+                                按时间升序
+                            </label>
+                        </div>
+                        <div class="checkbox checkbox-success">
+                            <input type="radio" name="order" id="radio14" value="time2" checked>
+                            <label for="radio14">
+                                按时间降序
+                            </label>
+                        </div>
+
 
 
                     </div>
@@ -200,21 +221,21 @@
                     <div class="col col-4">
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="type" id="type1" value="option3">
+                            <input type="radio" name="tid" id="type1" value="1">
                             <label for="type1">
                                 CPU
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="type" id="type2" value="option3">
+                            <input type="radio" name="type" id="type2" value="2">
                             <label for="type2">
                                 显卡
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="type" id="type3" value="option2" checked>
+                            <input type="radio" name="type" id="type3" value="3" checked>
                             <label for="type3">
                                 内存
                             </label>
@@ -230,21 +251,21 @@
 
                     <div class="col col-4">
                         <div class="checkbox checkbox-warning">
-                            <input type="radio" name="brand" id="brand1" value="option3">
+                            <input type="radio" name="bid" id="brand1" value="all">
                             <label for="brand1">
                                 全部
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-warning">
-                            <input type="radio" name="brand" id="brand2" value="option3">
+                            <input type="radio" name="bid" id="brand2" value="5">
                             <label for="brand2">
                                 英特尔
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-warning">
-                            <input type="radio" name="brand" id="brand3" value="option2" checked>
+                            <input type="radio" name="bid" id="brand3" value="2" checked>
                             <label for="brand3">
                                 华硕
                             </label>
@@ -346,3 +367,39 @@
 </script>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function ajaxJson(url,mehtod,data,possessMethod){
+            $.ajax({
+                url: url,
+                type: mehtod,
+                data: data,
+                dataType: 'JSON',
+                success: function(data){
+                    possessMethod(data);
+                },
+                error: function(){
+                    alert("access ajax server failed");
+                }
+            });
+        }
+
+        $("input[type='radio']").change(function(){
+
+            var order = $("input[name='order']:checked").val();
+            var tid = $("input[name='tid']:checked").val();
+            var bid = $("input[name='bid']:checked").val();
+
+            var data = 'tid='+tid+'&bid='+bid+'&order='+order;
+            ajaxJson('http://localhost:8888/p/list','GET',data,processProduct);
+
+        });
+
+        function processProduct(data) {
+
+        }
+
+    })
+
+</script>

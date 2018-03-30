@@ -30,7 +30,7 @@ public class ProductService {
         return productDao.getProductByID(id);
     }
 
-    public List<ProductEntity> list(String tid, String bid) {
-        return productDao.productList(tid,bid);
+    public List<ProductEntity> list(String tid, String bid, String order) {
+        return productDao.productList(tid,bid,order);
     }
 }

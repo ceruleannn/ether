@@ -151,9 +151,9 @@
                     <div class="wish-list">
                         <ul>
                             <li class="wish"><a href="javascript:"><span class="glyphicon glyphicon-check"
-                                                                         aria-hidden="true"></span>${requestScope.product.sort}</a></li>
+                                                                         aria-hidden="true"></span>${requestScope.product.type.name}</a></li>
                             <li class="compare"><a href="javascript:"><span class="glyphicon glyphicon-check"
-                                                                            aria-hidden="true"></span>${requestScope.product.brand}</a></li>
+                                                                            aria-hidden="true"></span>${requestScope.product.brand.name}</a></li>
                             <li class="compare"><a href="javascript:"><span class="glyphicon glyphicon-check"
                                                                             aria-hidden="true"></span>${requestScope.product.date}</a></li>
                         </ul>
