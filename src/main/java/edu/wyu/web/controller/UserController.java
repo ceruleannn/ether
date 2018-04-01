@@ -12,11 +12,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- *
- *
- *
- */
+
 @Controller
 @RequestMapping("/u")
 public class UserController {
@@ -47,7 +43,7 @@ public class UserController {
     public String signDo(HttpServletRequest request){
         String result = checkCode(request);
         if (result==null){
-            return result;
+            return "{\"code\":\"400\"}";
         }
 
         UserEntity user = new UserEntity();
