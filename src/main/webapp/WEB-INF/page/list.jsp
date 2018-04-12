@@ -19,6 +19,9 @@
     <!--//theme-style-->
     <script src="../../ui/js/jquery.min.js"></script>
 
+    <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+
+
     <!--<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />-->
     <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../ui/css/build.css" rel="stylesheet" type="text/css" media="all" />
@@ -113,42 +116,44 @@
             <div class="mid-popular">
 
                 <!--  for each element for single product -->
-                <c:forEach var="product" items="${requestScope.products}" >
+                <div id="list">
+                    <div v-for="product in products">
 
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../ui/images/pc.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../ui/images/pc.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>${product.brand.name}</span>
-                                    <h6><a href="single.html">${product.name}</a></h6>
+                    <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+                        <div class=" mid-pop">
+                            <div class="pro-img">
+                                <img src="../../ui/images/pc.jpg" class="img-responsive" alt="">
+                                <div class="zoom-icon ">
+                                    <a class="picture" href="../../ui/images/pc.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
+                                    <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
                                 </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../ui/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
                             </div>
-                            <div class="mid-2">
-                                <p ><em class="item_price">¥${product.price}</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
+                            <div class="mid-1">
+                                <div class="women">
+                                    <div class="women-top">
+                                        <span>{{product.brand.name}}</span>
+                                        <h6><a href="single.html">{{product.name}}</a></h6>
+                                    </div>
+                                    <div class="img item_add">
+                                        <a href="#"><img src="../../ui/images/ca.png" alt=""></a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="mid-2">
+                                    <p ><em class="item_price">¥{{product.price}}</em></p>
+                                    <div class="block">
+                                        <div class="starbox small ghosting"> </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
                                 </div>
 
-                                <div class="clearfix"></div>
                             </div>
-
                         </div>
                     </div>
-                </div>
 
-                </c:forEach>
+                    </div>
+                </div>
 
 
 
@@ -211,9 +216,6 @@
                     </div>
                 </div>
             </section>
-
-
-            <!---->
             <section  class="sky-form">
                 <h4 class="cate">类型</h4>
                 <div class="row row1 scroll-pane">
@@ -221,21 +223,21 @@
                     <div class="col col-4">
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="tid" id="type1" value="1">
+                            <input type="radio" name="tid" id="type1" value="1" checked >
                             <label for="type1">
                                 CPU
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="type" id="type2" value="2">
+                            <input type="radio" name="tid" id="type2" value="2">
                             <label for="type2">
                                 显卡
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="type" id="type3" value="3" checked>
+                            <input type="radio" name="tid" id="type3" value="3" >
                             <label for="type3">
                                 内存
                             </label>
@@ -369,37 +371,50 @@
 </html>
 
 <script type="text/javascript">
+
+    var vue = new Vue({
+        el: '#list',
+        data: {products: []},
+        methods: {
+            add: function (data) {
+                this.products = data;
+            }
+        }
+    });
+
     $(document).ready(function () {
-        function ajaxJson(url,mehtod,data,possessMethod){
+        function ajaxJson(url,method,data,possessMethod){
             $.ajax({
                 url: url,
-                type: mehtod,
+                type: method,
                 data: data,
-                dataType: 'JSON',
+                dataType: 'json',
                 success: function(data){
                     possessMethod(data);
                 },
-                error: function(){
-                    alert("access ajax server failed");
+                error: function(data){
+                    alert("err"+data);
                 }
             });
         }
 
-        $("input[type='radio']").change(function(){
+        var $_radio = $("input[type='radio']");
+        $_radio.change(function(){
 
             var order = $("input[name='order']:checked").val();
             var tid = $("input[name='tid']:checked").val();
             var bid = $("input[name='bid']:checked").val();
 
             var data = 'tid='+tid+'&bid='+bid+'&order='+order;
-            ajaxJson('http://localhost:8888/p/list','GET',data,processProduct);
+            ajaxJson('http://localhost:8888/p/list.do','GET',data,processProduct);
 
         });
 
         function processProduct(data) {
-
+            vue.add(JSON.parse(data));
         }
 
+        $("#type1").change();
     })
 
 </script>

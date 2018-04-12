@@ -4,7 +4,7 @@ function ajaxJson(url,mehtod,data,possessMethod){
         url: url,
         type: mehtod,
         data: data,
-        dataType: 'JSON',
+        dataType: 'json',
         success: function(data){
             possessMethod(data);
         },

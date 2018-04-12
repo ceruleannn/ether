@@ -64,7 +64,6 @@ public class ProductController {
         }
 
         request.setAttribute("products", products);
-        System.out.println(JSON.toJSONString(products));
         return  JSON.toJSONString(products);
     }
 
