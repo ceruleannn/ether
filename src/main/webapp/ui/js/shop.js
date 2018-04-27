@@ -1,8 +1,8 @@
 
-function ajaxJson(url,mehtod,data,possessMethod){
+function ajaxJson(url,methed,data,possessMethod){
     $.ajax({
         url: url,
-        type: mehtod,
+        type: methed,
         data: data,
         dataType: 'json',
         success: function(data){

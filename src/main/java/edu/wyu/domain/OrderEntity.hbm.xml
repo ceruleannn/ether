@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="edu.wyu.domain.OrderEntity" table="order" schema="os">
+        <id name="oid" column="oid"/>
+        <property name="date" column="date"/>
+        <property name="price" column="price"/>
+        <property name="deliverid" column="deliverid"/>
+        <property name="status" column="status"/>
+        <many-to-one name="user" class="edu.wyu.domain.UserEntity" column="uid"/>
+        <set name="details" inverse="true">
+            <key>
+                <column name="oid" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="edu.wyu.domain.OrderDetailEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -31,7 +31,9 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-			</props>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/os</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
 		</property>
 		<property name="configLocations">
 			<list>
@@ -40,11 +42,12 @@
 				</value>
 			</list>
 		</property>
-	</bean>
+
+    </bean>
 
 	<!--4 创建事务管理器 aop切面-->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<!--5 配置处理事务的注解-->

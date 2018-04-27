@@ -30,43 +30,45 @@
 	<mvc:resources location="/ui/css/" mapping="/ui/css/**" />
 	<mvc:resources location="/ui/images/" mapping="/ui/images/**" />
 	<mvc:resources location="/ui/fonts/" mapping="/ui/fonts/**" />
+	<mvc:resources location="/admin/" mapping="/admin/**" />
 	<!--<mvc:resources location="/photo/" mapping="/photo/**" />-->
 	<!--<mvc:resources location="/print_plugin/" mapping="/print_plugin/**" />-->
 	<!-- 开启注解 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
+						<value>application/json;charset=utf-8</value>
 						<value>text/plain;charset=utf-8</value>
-						<value>text/html;charset=UTF-8</value>
+						<value>text/html;charset=utf-8</value>
 					</list>
 				</property>
+				<constructor-arg value="UTF-8"/>
+				<property name="writeAcceptCharset" value="false"/>
 			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes" value="application/json" />
+	<bean  id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="edu.wyu.web.util.HtmlResourceView"/>
+		<property name="prefix" value="/admin"/>
+		<property name="suffix" value=".html"/>
+		<property name="order" value="0"/>
+		<property name="contentType" value="text/html;charset=UTF-8"/>
 	</bean>
-	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-	  <property name="templateLoaderPath" value="/WEB-INF/ftl/page"/>
-	  <property name="defaultEncoding" value="UTF-8" /> 
-	</bean>
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-	  <property name="cache" value="true"/>
-	  <property name="prefix" value=""/>
-	  <property name="suffix" value=".ftl"/>
-	  <property name="contentType" value="text/html; charset=UTF-8"></property>
-	</bean>
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/page"></property>
-		<property name="suffix" value=".jsp"></property>
+
+	<bean id="jspViewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/page"/>
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="1"/>
+
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
 	     <property name="maxUploadSize" value="104857600" /> 
 	     <property name="maxInMemorySize" value="4096" /> 
-	     <property name="defaultEncoding" value="UTF-8"></property> 
+	     <property name="defaultEncoding" value="UTF-8"/>
 	</bean> 
 </beans>  

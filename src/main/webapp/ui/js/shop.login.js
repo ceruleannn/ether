@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     function processLogin(data) {
         if (data["code"]==="200"){
-            window.location.href = "http://www.baidu.com";
+            window.location.href = "/index";
         }else{
             alert("密码错误");
         }

@@ -13,12 +13,15 @@ import java.lang.reflect.InvocationTargetException;
  *
  */
 @Controller
-@RequestMapping("/index")
 public class IndexController {
 
-    @RequestMapping("/list.do")
-    public String list(HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
+    @RequestMapping("/index")
+    public String index(HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
+        return "/index";
+    }
 
-        return "/haha";
+    @RequestMapping("/admin/index")
+    public String adminIndex(HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
+        return "/adminIndex";
     }
 }

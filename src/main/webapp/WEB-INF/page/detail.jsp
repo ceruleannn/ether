@@ -6,6 +6,9 @@
 
 <html>
 <head>
+
+    <base href="${pageContext.request.contextPath}" />
+
     <title>Single</title>
     <link href="../../ui/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- Custom Theme files -->
@@ -29,7 +32,7 @@
     <div class="container">
         <div class="head">
             <div class=" logo">
-                <a href="index.html"><img src="../../ui/images/logo.png" alt=""></a>
+                <a href="/index"><img src="../../ui/images/logo.png" alt=""></a>
             </div>
         </div>
     </div>
@@ -37,9 +40,20 @@
         <div class="container">
             <div class="col-sm-5 col-md-offset-2  header-login">
                 <ul>
-                    <li><a href="login.html">login</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+
+                    <c:choose>
+
+                        <c:when test="${sessionScope.user==null}">
+                            <li><a href="/u/login">登陆</a></li>
+                            <li><a href="/u/sign">注册</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="#">欢迎你 &nbsp;&nbsp;${sessionScope.user.username}</a></li>
+                            <li><a href="/u/logout">注销</a></li>
+                            <li><a href="/u/edit">修改密码</a></li>
+                            <li><a href="/o/order">订单</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
 
@@ -68,28 +82,21 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                         <ul class="nav navbar-nav nav_1">
-                            <li><a class="color" href="index.html">主页</a></li>
+                            <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="product.html">新闻</a></li>
-                            <li><a class="color4" href="404.html">CPU</a></li>
-                            <li><a class="color3" href="product.html">内存</a></li>
-                            <li><a class="color4" href="404.html">显卡</a></li>
-                            <li><a class="color5" href="typo.html">硬盘</a></li>
-                            <li><a class="color6" href="contact.html">呵呵</a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
+                            <li><a class="color4" href="/p/list?type=1">CPU</a></li>
+                            <li><a class="color3" href="/p/list?type=3">内存</a></li>
+                            <li><a class="color4" href="/p/list?type=2">显卡</a></li>
+                            <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
+                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
                 </nav>
             </div>
             <div class="col-sm-2 search-right">
-                <ul class="heart">
-                    <li>
-                        <a href="wishlist.html">
-                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                        </a></li>
-                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i
-                            class="glyphicon glyphicon-search"> </i></a></li>
-                </ul>
+
                 <div class="cart box_1">
                     <a href="checkout.html">
                         <h3>

@@ -60,8 +60,14 @@ public class UserController {
         return "{\"code\":\"200\"}";
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "/index";
+    }
 
-    @RequestMapping("/login")
+
+    @RequestMapping("/login2")
     public String login(HttpServletRequest request){
         return "/login";
     }

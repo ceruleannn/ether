@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="edu.wyu.domain.OrderDetailEntity" table="order_detail" schema="os">
+        <id name="odid" column="odid"/>
+        <property name="price" column="price"/>
+        <property name="number" column="number"/>
+        <property name="pid" column="pid"/>
+        <many-to-one name="order" class="edu.wyu.domain.OrderEntity">
+            <column name="oid" not-null="true"/>
+        </many-to-one>
+        <one-to-one name="product" class="edu.wyu.domain.ProductEntity"/>
+    </class>
+</hibernate-mapping>

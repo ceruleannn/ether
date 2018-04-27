@@ -2,6 +2,7 @@ package edu.wyu.domain;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  *
@@ -25,8 +26,8 @@ public class ProductEntity {
     private String name;
     private int pid;
     private Integer sales;
-    private SysBrandEntity brand;
     private SysTypeEntity type;
+    private SysBrandEntity brand;
 
     @Basic
     @Column(name = "ison")
@@ -172,54 +173,27 @@ public class ProductEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ProductEntity that = (ProductEntity) o;
-
-        if (pid != that.pid) return false;
-        if (ison != null ? !ison.equals(that.ison) : that.ison != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (pic3 != null ? !pic3.equals(that.pic3) : that.pic3 != null) return false;
-        if (pic2 != null ? !pic2.equals(that.pic2) : that.pic2 != null) return false;
-        if (pic1 != null ? !pic1.equals(that.pic1) : that.pic1 != null) return false;
-        if (detail3 != null ? !detail3.equals(that.detail3) : that.detail3 != null) return false;
-        if (detail2 != null ? !detail2.equals(that.detail2) : that.detail2 != null) return false;
-        if (detail1 != null ? !detail1.equals(that.detail1) : that.detail1 != null) return false;
-        if (overview != null ? !overview.equals(that.overview) : that.overview != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (name2 != null ? !name2.equals(that.name2) : that.name2 != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (sales != null ? !sales.equals(that.sales) : that.sales != null) return false;
-
-        return true;
+        return pid == that.pid &&
+                Objects.equals(ison, that.ison) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(pic3, that.pic3) &&
+                Objects.equals(pic2, that.pic2) &&
+                Objects.equals(pic1, that.pic1) &&
+                Objects.equals(detail3, that.detail3) &&
+                Objects.equals(detail2, that.detail2) &&
+                Objects.equals(detail1, that.detail1) &&
+                Objects.equals(overview, that.overview) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(name2, that.name2) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(sales, that.sales);
     }
 
     @Override
     public int hashCode() {
-        int result = ison != null ? ison.hashCode() : 0;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (pic3 != null ? pic3.hashCode() : 0);
-        result = 31 * result + (pic2 != null ? pic2.hashCode() : 0);
-        result = 31 * result + (pic1 != null ? pic1.hashCode() : 0);
-        result = 31 * result + (detail3 != null ? detail3.hashCode() : 0);
-        result = 31 * result + (detail2 != null ? detail2.hashCode() : 0);
-        result = 31 * result + (detail1 != null ? detail1.hashCode() : 0);
-        result = 31 * result + (overview != null ? overview.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (name2 != null ? name2.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + pid;
-        result = 31 * result + (sales != null ? sales.hashCode() : 0);
-        return result;
-    }
 
-    @OneToOne
-    @JoinColumn(name = "bid", referencedColumnName = "bid")
-    public SysBrandEntity getBrand() {
-        return brand;
-    }
-
-    public void setBrand(SysBrandEntity brand) {
-        this.brand = brand;
+        return Objects.hash(ison, date, pic3, pic2, pic1, detail3, detail2, detail1, overview, price, name2, name, pid, sales);
     }
 
     @OneToOne
@@ -230,5 +204,15 @@ public class ProductEntity {
 
     public void setType(SysTypeEntity type) {
         this.type = type;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "bid", referencedColumnName = "bid")
+    public SysBrandEntity getBrand() {
+        return brand;
+    }
+
+    public void setBrand(SysBrandEntity brand) {
+        this.brand = brand;
     }
 }

@@ -26,9 +26,9 @@ public class StringUtils {
         return m.matches();
     }
 
-    @Test
-    public void test(){
-        System.out.println(validatePhoneValid("18566786214"));
+    public static boolean isInteger(String str) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        return pattern.matcher(str).matches();
     }
 }
 

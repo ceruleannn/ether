@@ -6,14 +6,19 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/os</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <mapping class="edu.wyu.domain.UserEntity"/>
-        <mapping resource="edu/wyu/domain/UserEntity.hbm.xml"/>
         <mapping class="edu.wyu.domain.ProductEntity"/>
         <mapping resource="edu/wyu/domain/ProductEntity.hbm.xml"/>
         <mapping class="edu.wyu.domain.SysBrandEntity"/>
         <mapping resource="edu/wyu/domain/SysBrandEntity.hbm.xml"/>
         <mapping class="edu.wyu.domain.SysTypeEntity"/>
         <mapping resource="edu/wyu/domain/SysTypeEntity.hbm.xml"/>
+        <mapping class="edu.wyu.domain.OrderEntity"/>
+        <mapping resource="edu/wyu/domain/OrderEntity.hbm.xml"/>
+        <mapping resource="edu/wyu/domain/UserEntity.hbm.xml"/>
+        <mapping class="edu.wyu.domain.UserEntity"/>
+        <mapping class="edu.wyu.domain.OrderDetailEntity"/>
+        <mapping resource="edu/wyu/domain/OrderDetailEntity.hbm.xml"/>
+
 
     </session-factory>
 </hibernate-configuration>

@@ -48,7 +48,12 @@ public class ProductController {
     @RequestMapping("/list")
     public String list(HttpServletRequest request){
 
-        return "/list";
+        String type = request.getParameter("type");
+        if (type!=null){
+            request.setAttribute("type",Integer.parseInt(type));
+            return "/list";
+        }
+        return "/404";
     }
 
     @RequestMapping("/list.do")

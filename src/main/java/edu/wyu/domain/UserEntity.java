@@ -1,6 +1,7 @@
 package edu.wyu.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  *
@@ -8,19 +9,12 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name = "user", schema = "os", catalog = "")
 public class UserEntity {
     private String password;
     private String phone;
     private int uid;
     private String username;
-
-    public UserEntity() {
-    }
-
-    public UserEntity(String password, String phone) {
-        this.password = password;
-        this.phone = phone;
-    }
 
     @Basic
     @Column(name = "password")
@@ -66,23 +60,16 @@ public class UserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         UserEntity that = (UserEntity) o;
-
-        if (uid != that.uid) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-
-        return true;
+        return uid == that.uid &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(phone, that.phone) &&
+                Objects.equals(username, that.username);
     }
 
     @Override
     public int hashCode() {
-        int result = password != null ? password.hashCode() : 0;
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + uid;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        return result;
+
+        return Objects.hash(password, phone, uid, username);
     }
 }

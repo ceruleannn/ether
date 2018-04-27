@@ -5,6 +5,9 @@
 
 <html>
 <head>
+
+    <base href="${pageContext.request.contextPath}" />
+
     <title>Products</title>
     <link href="../../ui/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
@@ -33,7 +36,7 @@
     <div class="container">
         <div class="head">
             <div class=" logo">
-                <a href="index.html"><img src="../../ui/images/logo.png" alt=""></a>
+                <a href="/index"><img src="../../ui/images/logo.png" alt=""></a>
             </div>
         </div>
     </div>
@@ -41,9 +44,20 @@
         <div class="container">
             <div class="col-sm-5 col-md-offset-2  header-login">
                 <ul >
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+
+                    <c:choose>
+
+                        <c:when test="${sessionScope.user==null}">
+                            <li><a href="/u/login">登陆</a></li>
+                            <li><a href="/u/sign">注册</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="#">欢迎你 ${sessionScope.user.username}</a></li>
+                            <li><a href="/u/logout">注销</a></li>
+                            <li><a href="/u/edit">修改密码</a></li>
+                            <li><a href="/o/order">订单</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
 
@@ -71,14 +85,14 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                         <ul class="nav navbar-nav nav_1">
-                            <li><a class="color" href="index.html">主页</a></li>
+                            <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="product.html">新闻</a></li>
-                            <li><a class="color4" href="404.html">CPU</a></li>
-                            <li><a class="color3" href="product.html">内存</a></li>
-                            <li><a class="color4" href="404.html">显卡</a></li>
-                            <li><a class="color5" href="typo.html">硬盘</a></li>
-                            <li ><a class="color6" href="contact.html">呵呵</a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
+                            <li><a class="color4" href="/p/list?type=1">CPU</a></li>
+                            <li><a class="color3" href="/p/list?type=3">内存</a></li>
+                            <li><a class="color4" href="/p/list?type=2">显卡</a></li>
+                            <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
+                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -132,7 +146,7 @@
                                 <div class="women">
                                     <div class="women-top">
                                         <span>{{product.brand.name}}</span>
-                                        <h6><a href="single.html">{{product.name}}</a></h6>
+                                        <h6><a v-bind:href="'/p/detail/' + product.pid" >{{product.name}}</a></h6>
                                     </div>
                                     <div class="img item_add">
                                         <a href="#"><img src="../../ui/images/ca.png" alt=""></a>
@@ -223,23 +237,30 @@
                     <div class="col col-4">
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="tid" id="type1" value="1" checked >
+                            <input type="radio" name="tid" id="type1" value="1" <c:if test="${requestScope.type==1}" >checked</c:if> >
                             <label for="type1">
                                 CPU
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="tid" id="type2" value="2">
+                            <input type="radio" name="tid" id="type2" value="2" <c:if test="${requestScope.type==2}" >checked</c:if> >
                             <label for="type2">
                                 显卡
                             </label>
                         </div>
 
                         <div class="checkbox checkbox-info">
-                            <input type="radio" name="tid" id="type3" value="3" >
+                            <input type="radio" name="tid" id="type3" value="3" <c:if test="${requestScope.type==3}" >checked</c:if>  >
                             <label for="type3">
                                 内存
+                            </label>
+                        </div>
+
+                        <div class="checkbox checkbox-info">
+                            <input type="radio" name="tid" id="type4" value="4" <c:if test="${requestScope.type==4}" >checked</c:if>  >
+                            <label for="type4">
+                                硬盘
                             </label>
                         </div>
 
@@ -253,7 +274,7 @@
 
                     <div class="col col-4">
                         <div class="checkbox checkbox-warning">
-                            <input type="radio" name="bid" id="brand1" value="all">
+                            <input type="radio" name="bid" id="brand1" value="all" checked>
                             <label for="brand1">
                                 全部
                             </label>
@@ -267,7 +288,7 @@
                         </div>
 
                         <div class="checkbox checkbox-warning">
-                            <input type="radio" name="bid" id="brand3" value="2" checked>
+                            <input type="radio" name="bid" id="brand3" value="2" >
                             <label for="brand3">
                                 华硕
                             </label>
@@ -411,7 +432,7 @@
         });
 
         function processProduct(data) {
-            vue.add(JSON.parse(data));
+            vue.add(data);
         }
 
         $("#type1").change();
