@@ -85,6 +85,10 @@ public class BaseDao<T>{
 
     }
 
+    public T get(Serializable id){
+        return (T) getSession().get(this.getClz(), id);
+    }
+
     public List<T> list(String hql, Object... args) {
         return this.list(hql, args, null, null);
     }

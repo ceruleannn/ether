@@ -6,6 +6,9 @@
 
     <class name="edu.wyu.domain.SysBrandEntity" table="sys_brand" schema="os">
         <id name="bid" column="bid"/>
+        <property name="date" column="date"/>
+        <property name="status" column="status"/>
+        <property name="region" column="region"/>
         <property name="icon" column="icon"/>
         <property name="detail" column="detail"/>
         <property name="name" column="name"/>

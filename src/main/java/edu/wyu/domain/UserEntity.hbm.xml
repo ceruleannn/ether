@@ -6,8 +6,15 @@
 
     <class name="edu.wyu.domain.UserEntity" table="user" schema="os">
         <id name="uid" column="uid"/>
+        <property name="realname" column="realname"/>
         <property name="password" column="password"/>
         <property name="phone" column="phone"/>
+        <property name="status" column="status"/>
+        <property name="permission" column="permission"/>
         <property name="username" column="username"/>
+        <property name="mail" column="mail"/>
+        <property name="sex" column="sex"/>
+        <property name="date" column="date"/>
+        <property name="address" column="address"/>
     </class>
 </hibernate-mapping>

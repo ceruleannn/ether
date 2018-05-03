@@ -11,9 +11,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_type", schema = "os", catalog = "")
 public class SysTypeEntity {
+    private String status;
     private String detail;
     private String name;
     private int tid;
+
+    @Basic
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Basic
     @Column(name = "detail")
@@ -51,6 +62,7 @@ public class SysTypeEntity {
         if (o == null || getClass() != o.getClass()) return false;
         SysTypeEntity that = (SysTypeEntity) o;
         return tid == that.tid &&
+                Objects.equals(status, that.status) &&
                 Objects.equals(detail, that.detail) &&
                 Objects.equals(name, that.name);
     }
@@ -58,6 +70,6 @@ public class SysTypeEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(detail, name, tid);
+        return Objects.hash(status, detail, name, tid);
     }
 }

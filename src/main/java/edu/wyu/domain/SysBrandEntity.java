@@ -1,6 +1,7 @@
 package edu.wyu.domain;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -11,10 +12,43 @@ import java.util.Objects;
 @Entity
 @Table(name = "sys_brand", schema = "os", catalog = "")
 public class SysBrandEntity {
+    private Timestamp date;
+    private String status;
+    private String region;
     private String icon;
     private String detail;
     private String name;
     private int bid;
+
+    @Basic
+    @Column(name = "date")
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
+
+    @Basic
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Basic
+    @Column(name = "region")
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     @Basic
     @Column(name = "icon")
@@ -62,6 +96,9 @@ public class SysBrandEntity {
         if (o == null || getClass() != o.getClass()) return false;
         SysBrandEntity that = (SysBrandEntity) o;
         return bid == that.bid &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(region, that.region) &&
                 Objects.equals(icon, that.icon) &&
                 Objects.equals(detail, that.detail) &&
                 Objects.equals(name, that.name);
@@ -70,6 +107,6 @@ public class SysBrandEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(icon, detail, name, bid);
+        return Objects.hash(date, status, region, icon, detail, name, bid);
     }
 }

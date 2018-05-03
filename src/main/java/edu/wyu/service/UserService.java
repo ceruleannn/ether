@@ -49,4 +49,32 @@ public class UserService {
     public boolean checkPhoneExist(String phone){
         return userDao.checkPhoneExist(phone);
     }
+
+    public void start(String uid){
+        UserEntity user = userDao.get(uid);
+        user.setStatus("启用");
+        userDao.update(user);
+    }
+    public void stop(String uid){
+        UserEntity user = userDao.get(uid);
+        user.setStatus("停用");
+        userDao.update(user);
+    }
+
+    public void update(UserEntity userEntity){
+        UserEntity old = userDao.get(userEntity.getUid());
+        old.setUsername(userEntity.getUsername());
+        old.setPhone(userEntity.getPhone());
+        old.setAddress(userEntity.getAddress());
+        old.setStatus(userEntity.getStatus());
+        old.setSex(userEntity.getSex());
+        old.setRealname(userEntity.getRealname());
+        old.setMail(userEntity.getMail());
+
+        userDao.update(old);
+    }
+
+    public void delete(String uid) {
+        userDao.delete(Integer.parseInt(uid));
+    }
 }

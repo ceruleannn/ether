@@ -6,6 +6,7 @@
 
     <class name="edu.wyu.domain.SysTypeEntity" table="sys_type" schema="os">
         <id name="tid" column="tid"/>
+        <property name="status" column="status"/>
         <property name="detail" column="detail"/>
         <property name="name" column="name"/>
     </class>

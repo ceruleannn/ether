@@ -1,5 +1,8 @@
 package edu.wyu.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import edu.wyu.domain.UserEntity;
 import edu.wyu.service.UserService;
 import edu.wyu.util.StringUtils;
@@ -25,12 +28,13 @@ public class UserController {
     }
 
     @RequestMapping("/list.do")
+    @ResponseBody
     public String list(HttpServletRequest request){
         List<UserEntity> users = userService.list();
         for (UserEntity user : users) {
-            System.out.println(user.getUsername());
+            user.setPassword("");
         }
-        return "/haha";
+        return "{\"data\":"+JSON.toJSONString(users)+"}";
     }
 
     @RequestMapping("/sign")
@@ -111,6 +115,41 @@ public class UserController {
         request.getSession().setAttribute("user",user);
         return "{\"code\":\"200\"}";
     }
+
+    @RequestMapping("/admin")
+    public String admin(HttpServletRequest request){
+
+        String action = request.getParameter("action");
+        if ("start".equals(action)){
+            String uid = request.getParameter("uid");
+            userService.start(uid);
+        }
+        else if ("stop".equals(action)){
+            String uid = request.getParameter("uid");
+            userService.stop(uid);
+        }
+        else if ("update".equals(action)){
+            UserEntity user = new UserEntity();
+            user.setUid(Integer.parseInt(request.getParameter("uid")));
+            user.setUsername(request.getParameter("username"));
+            user.setPhone(request.getParameter("phone"));
+            user.setAddress(request.getParameter("address"));
+            user.setStatus(request.getParameter("status"));
+            user.setSex(request.getParameter("sex"));
+            user.setRealname(request.getParameter("realname"));
+            user.setMail(request.getParameter("mail"));
+
+            userService.update(user);
+        }
+        else if ("delete".equals(action)){
+            String uid = request.getParameter("uid");
+            userService.delete(uid);
+        }
+
+        return null;
+    }
+
+
 
     @RequestMapping("/sms")
     @ResponseBody
