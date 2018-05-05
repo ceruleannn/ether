@@ -13,18 +13,7 @@ public class BrandDao extends BaseDao<SysBrandEntity>{
     public List<SysBrandEntity> listAll() {
         return this.list("from SysBrandEntity as b");
     }
-    @Override
-    public SysBrandEntity get(Serializable id) {
 
-        if (id instanceof String){
-            id = Integer.parseInt((String)(id));
-        }
-
-        if (id instanceof Integer){
-            return super.get(id);
-        }
-        return null;
-    }
 
 }
 

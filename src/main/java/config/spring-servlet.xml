@@ -32,6 +32,7 @@
 	<mvc:resources location="/ui/fonts/" mapping="/ui/fonts/**" />
 	<mvc:resources location="/admin/" mapping="/admin/**" />
 	<mvc:resources location="/image/logo/" mapping="/image/logo/**" />
+	<mvc:resources location="/image/productPic/" mapping="/image/productPic/**" />
 	<!--<mvc:resources location="/photo/" mapping="/photo/**" />-->
 	<!--<mvc:resources location="/print_plugin/" mapping="/print_plugin/**" />-->
 	<!-- 开启注解 -->

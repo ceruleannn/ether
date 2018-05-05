@@ -85,7 +85,7 @@
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
+                            <li><a class="color6" href="/p/list?type=5">售后</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -94,7 +94,7 @@
             <div class="col-sm-2 search-right">
 
                 <div class="cart box_1">
-                    <a href="checkout.html">
+                    <a href="/c/checkout">
                         <h3>
                             <div class="total">
                                 <span class="simpleCart_total"></span></div>
@@ -180,6 +180,26 @@
                 <div class="login-mail">
                     <input id="repassword" type="password" placeholder="确认密码">
                     <i class="glyphicon glyphicon-lock"></i>
+                </div>
+
+                <div class="login-mail">
+                    <input id="realname" type="text" placeholder="真实名字">
+                    <i class="glyphicon glyphicon-user"></i>
+                </div>
+
+                <div class="login-mail">
+                    <input id="sex" type="text" placeholder="性别">
+                    <i class="glyphicon glyphicon-user"></i>
+                </div>
+
+                <div class="login-mail">
+                    <input id="address" type="text" placeholder="地址">
+                    <i class="glyphicon glyphicon-user"></i>
+                </div>
+
+                <div class="login-mail">
+                    <input id="mail" type="text" placeholder="邮箱">
+                    <i class="glyphicon glyphicon-user"></i>
                 </div>
 
                 <!--<a class="news-letter " href="#">-->

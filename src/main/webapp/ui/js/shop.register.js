@@ -43,7 +43,7 @@ $(document).ready(function () {
         var phone = $.trim($('#phone').val());
         ev.preventDefault();
         if (curClick===0){
-            ajaxJson('http://localhost:8888'+'/u/sms?phone='+phone+'&action=register','GET',null,processCode);
+            ajaxJson('/u/sms?phone='+phone+'&action=register','GET',null,processCode);
         }
         else{
 
@@ -51,8 +51,14 @@ $(document).ready(function () {
             var code = $.trim($('#code').val());
             var password = $.trim($('#password').val());
 
+            var realname = $.trim($('#realname').val());
+            var sex = $.trim($('#sex').val());
+            var address = $.trim($('#address').val());
+            var mail = $.trim($('#mail').val());
+
+
             var data = 'phone='+phone+'&username='+username+'&code='+code+'&password='+password;
-            ajaxJson('http://localhost:8888'+'/u/sign.do','GET',data,processRegister);
+            ajaxJson('/u/sign.do','GET',{phone:phone,username:username,code:code,password:password,realname:realname,sex:sex,address:address,mail:mail},processRegister);
         }
     });
 
@@ -85,7 +91,7 @@ $(document).ready(function () {
         if (data["code"]!=="200"){
             alert("验证码错误");
         }else{
-            window.location.href="http://www.baidu.com";
+            window.location.href="/index";
         }
     }
 

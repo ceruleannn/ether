@@ -12,6 +12,6 @@
         <many-to-one name="order" class="edu.wyu.domain.OrderEntity">
             <column name="oid" not-null="true"/>
         </many-to-one>
-        <one-to-one name="product" class="edu.wyu.domain.ProductEntity"/>
+        <one-to-one name="product" class="edu.wyu.domain.ProductEntity" lazy="false"/>
     </class>
 </hibernate-mapping>

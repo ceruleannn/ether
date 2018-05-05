@@ -27,4 +27,20 @@ public class OrderDao extends BaseDao<OrderEntity>{
         return this.list("from OrderEntity as o join fetch o.user u join fetch o.details where u.uid = ?",Integer.parseInt(uid));
     }
 
+    public List<OrderEntity> listByStatus(String status) {
+
+        if (status==null){
+            return null;
+        }
+
+
+        String hql = "select distinct o from OrderEntity as o ";
+
+        if (!status.trim().equals("all")){
+            hql += " where o.status = ?";
+            return this.list(hql,status.trim());
+        }
+        return this.list(hql);
+
+    }
 }

@@ -21,25 +21,33 @@ public class ProductDao extends BaseDao<ProductEntity>{
 
     public List<ProductEntity> productList(String tid, String bid, String order) {
 
-        if (tid==null){
-            return null;
-        }
-
-        List<Object> list = new ArrayList<>(2);
-        list.add(Integer.parseInt(tid));
-
         StringBuilder sb = new StringBuilder();
-        sb.append("from ProductEntity as p join fetch p.type t ");
+        List<Object> list = new ArrayList<>(2);
+
+        sb.append("from ProductEntity as p ");
+
+        if (tid!=null){
+            sb.append(" join fetch p.type t ");
+        }
 
         if (bid!=null){
-           sb.append(" join fetch p.brand b where t.tid = ? ");
-           if (!bid.equals("all")){
-               sb.append(" and b.bid = ? ");
-               list.add(Integer.parseInt(bid));
-           }
+            sb.append(" join fetch p.brand b ");
         }
-        else {
-            sb.append("where t.tid = ?");
+
+        sb.append(" where 1=1 ");
+
+        if (tid!=null){
+            if (!tid.equals("all")){
+                sb.append(" and t.tid = ? ");
+                list.add(Integer.parseInt(tid));
+            }
+        }
+
+        if (bid!=null){
+            if (!bid.equals("all")){
+                sb.append(" and b.bid = ? ");
+                list.add(Integer.parseInt(bid));
+            }
         }
 
         sb.append(" order by ");
@@ -56,13 +64,13 @@ public class ProductDao extends BaseDao<ProductEntity>{
                     sb.append("sales asc");
                     break;
                 case "time":
-                    sb.append("date asc");
+                    sb.append("p.date asc");
                     break;
                 case "price2":
                     sb.append("price desc");
                     break;
                 case "time2":
-                    sb.append("date desc");
+                    sb.append("p.date desc");
                     break;
                 default:
                     sb.append("sales desc");
@@ -70,7 +78,7 @@ public class ProductDao extends BaseDao<ProductEntity>{
             }
         }
 
-
+        System.out.println("sql:"+sb.toString());
         return this.list(sb.toString(),list.toArray(new Object[list.size()]));
 
     }

@@ -36,7 +36,7 @@ $(document).ready(function () {
         var phone = $.trim($('#phone').val());
         ev.preventDefault();
         if (curClick===0){
-            ajaxJson('http://localhost:8888'+'/u/sms?phone='+phone+'&action=edit','GET',null,processCode);
+            ajaxJson('/u/sms?phone='+phone+'&action=edit','GET',null,processCode);
         }
         else{
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
             var password = $.trim($('#password').val());
 
             var data = 'phone='+phone+'&code='+code+'&password='+password;
-            ajaxJson('http://localhost:8888'+'/u/edit.do','GET',data,processEdit);
+            ajaxJson('/u/edit.do','GET',data,processEdit);
         }
     });
 

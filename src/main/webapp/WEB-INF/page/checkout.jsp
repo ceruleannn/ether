@@ -10,7 +10,7 @@
 
     <base href="${pageContext.request.contextPath}" />
 
-    <title>我的订单</title>
+    <title>购物车</title>
     <link href="../../ui/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <!--theme-style-->
@@ -120,9 +120,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h1>订单</h1>
+        <h1>购物车</h1>
         <em></em>
-        <h2><a href="index.html">Home</a><label>/</label>订单</h2>
+        <h2><a href="index.html">Home</a><label>/</label>购物车</h2>
     </div>
 </div>
 
@@ -135,20 +135,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <th class="table-grid">宝贝</th>
 
                         <th >数量 </th>
-                        <th>价格</th>
-                        <th >状态 </th>
-                        <th>物流</th>
+                        <th>单价</th>
+
                         <th>操作</th>
                     </tr>
 
-                    <template v-for="order in orders" :key="order.oid">
 
-                        <tr v-for="detail in order.details" class="cart-header">
+                        <tr v-for="detail in details" class="cart-header">
 
                             <td  class="ring-in"><a :href="'/p/detail/'+detail.product.pid" class="at-in"><img
                                     src="../../ui/images/ch.jpg" class="img-responsive" alt=""></a>
                                 <div class="sed">
-                                    <p>订单号: {{order.oid}} &nbsp;&nbsp;&nbsp; - &nbsp; &nbsp;&nbsp;{{ order.date | time }}</p>
                                     <h5><a :href="'/p/detail/'+detail.product.pid">{{detail.product.name}}</a></h5>
 
                                 </div>
@@ -156,16 +153,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </td>
                             <td>{{detail.number}}</td>
                             <td>{{detail.price}}</td>
-                            <td>{{order.status}}</td>
-                            <td class="item_price">{{order.deliverCompany}} {{order.deliverid}}</td>
-                            <td v-if="order.status=='待收货'"><button :id="order.oid" onclick="getProduct(this)" class="btn btn-default"> 收货 </button></td>
+                            <td ><button :id="detail.product.pid" onclick="remove(this)" class="btn btn-default"> 移除 </button></td>
 
                         </tr>
-                    </template>
                 </table>
             </div>
         </div>
-
+        <div class="produced">
+            <a href="single.html" class="hvr-skew-backward">Produced To Buy</a>
+        </div>
     </div>
 </div>
 
@@ -255,43 +251,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     var vue = new Vue({
         el: '#list',
-        data: {orders: []},
+        data: {details: []},
         methods: {
             add: function (data) {
-                this.orders = data;
+                this.details = data;
             }
         },
-        filters:{
-            time:function (value) {
 
-                function add0(m) {
-                    return m < 10 ? '0' + m : m
-                }
-
-                var time = new Date(parseInt(value));
-                var y = time.getFullYear();
-                var m = time.getMonth() + 1;
-                var d = time.getDate();
-
-                var h = time.getHours();
-                var i = time.getMinutes();
-                var s = time.getSeconds();
-
-                return y + '-' + add0(m) + '-' + add0(d)+ ' '+ add0(h)+ ':'+add0(i)+':'+add0(s);
-            }
-        },
         mounted:function () {
             var that = this;
-            $.get('/o/order.do',null,function (data) {
-                that.add(data);
+            $.get('/c/list',null,function (data) {
+                that.add(data.data);
             },'json')
         }
 
     });
 
-    function getProduct(id) {
-        $.get('/o/gotProduct',{oid:id.id},function (data) {
-            window.location.href = data.url;
+    function remove(id) {
+        $.get('/c/remove',{pid:id.id},function (data) {
+            window.location.href = '/c/checkout';
         },'json')
     }
 

@@ -100,8 +100,6 @@ public class BrandController {
     public String fileUpload(HttpServletRequest request,
                              @RequestParam("filedata") MultipartFile file) throws Exception {
 
-        System.out.println("access logo ");
-
         if (file==null){
             return null;
         }
@@ -120,7 +118,8 @@ public class BrandController {
             }
 
             String name = file.getOriginalFilename();
-            request.getSession().setAttribute("logo",file);
+            //request.getSession().setAttribute("logo",file);
+
             file.transferTo(new File(uploadDir + "/logo/" + name));
             return "{\"path\":\"/image/logo/"+name+"\"}";
 

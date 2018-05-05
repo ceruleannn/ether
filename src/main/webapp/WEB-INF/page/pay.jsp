@@ -1,16 +1,14 @@
 
-<%@ page language="java" pageEncoding="UTF-8"
-         contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
-<!DOCTYPE html>
+
 <html>
 <head>
 
     <base href="${pageContext.request.contextPath}" />
 
-    <title>我的订单</title>
+    <title>支付</title>
     <link href="../../ui/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <!--theme-style-->
@@ -18,16 +16,11 @@
     <!--//theme-style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Shopin Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndroId Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!--theme-style-->
     <link href="../../ui/css/style4.css" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
     <script src="../../ui/js/jquery.min.js"></script>
-
-    <script src="../../admin/js/vue.js"></script>
-
 
 </head>
 <body>
@@ -61,7 +54,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </c:choose>
                 </ul>
             </div>
-
             <div class="clearfix"> </div>
         </div>
     </div>
@@ -93,7 +85,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
+                            <li><a class="color6" href="/p/list?type=5">售后</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -112,6 +104,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="clearfix"> </div>
 
+                <!----->
             </div>
             <div class="clearfix"></div>
         </div>
@@ -120,56 +113,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h1>订单</h1>
+        <h1>支付</h1>
         <em></em>
-        <h2><a href="index.html">Home</a><label>/</label>订单</h2>
+        <h2><a href="index.html">Home</a><label>/</label>pay</h2>
     </div>
 </div>
-
+<!--login-->
 <div class="container">
-    <div class="check-out">
-        <div class="bs-example4" data-example-id="simple-responsive-table">
-            <div id="list" class="table-responsive">
-                <table class="table-heading simpleCart_shelfItem">
-                    <tr>
-                        <th class="table-grid">宝贝</th>
+    <form>
+        <p><input id="inputprice" type="text" name="inputprice" class="form-control" placeholder="请输入金额" required></p>
 
-                        <th >数量 </th>
-                        <th>价格</th>
-                        <th >状态 </th>
-                        <th>物流</th>
-                        <th>操作</th>
-                    </tr>
-
-                    <template v-for="order in orders" :key="order.oid">
-
-                        <tr v-for="detail in order.details" class="cart-header">
-
-                            <td  class="ring-in"><a :href="'/p/detail/'+detail.product.pid" class="at-in"><img
-                                    src="../../ui/images/ch.jpg" class="img-responsive" alt=""></a>
-                                <div class="sed">
-                                    <p>订单号: {{order.oid}} &nbsp;&nbsp;&nbsp; - &nbsp; &nbsp;&nbsp;{{ order.date | time }}</p>
-                                    <h5><a :href="'/p/detail/'+detail.product.pid">{{detail.product.name}}</a></h5>
-
-                                </div>
-                                <div sclass="clearfix"></div>
-                            </td>
-                            <td>{{detail.number}}</td>
-                            <td>{{detail.price}}</td>
-                            <td>{{order.status}}</td>
-                            <td class="item_price">{{order.deliverCompany}} {{order.deliverid}}</td>
-                            <td v-if="order.status=='待收货'"><button :id="order.oid" onclick="getProduct(this)" class="btn btn-default"> 收货 </button></td>
-
-                        </tr>
-                    </template>
-                </table>
-            </div>
+        <div class="radio">
+            <label>
+                <p><input type="radio" name="demo1" id="demo1-alipay" value="option1" checked="">
+                    支付宝支付</p>
+            </label>
         </div>
+        <div class="radio">
+            <label>
+                <p><input type="radio" name="demo1" id="demo1-weixin" value="option2">
+                    微信支付</p>
+            </label>
+        </div>
+        <button type="button" id="demoBtn1">确认购买</button>
+    </form>
 
-    </div>
+
+
+    <form style='display:none;' id='formpay' name='formpay' method='post' action='https://pay.paysapi.com'>
+        <input name='goodsname' id='goodsname' type='text' value='1' />
+        <input name='istype' id='istype' type='text' value='' />
+        <input name='key' id='key' type='text' value=''/>
+        <input name='notify_url' id='notify_url' type='text' value=''/>
+        <input name='orderid' id='orderid' type='text' value=''/>
+        <input name='orderuid' id='orderuid' type='text' value=''/>
+        <input name='price' id='price' type='text' value=''/>
+        <input name='return_url' id='return_url' type='text' value=''/>
+        <input name='uid' id='uid' type='text' value=''/>
+        <input type='submit' id='submitdemo1'>
+    </form>
+
+
 </div>
 
 <!--//login-->
+
 <!--brand-->
 <div class="container">
     <div class="brand">
@@ -189,9 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--//brand-->
-</div>
 
-</div>
 <!--//content-->
 <!--//footer-->
 <div class="footer">
@@ -240,8 +226,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
         </div>
     </div>
-
 </div>
+<!--//footer-->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 <script src="../../ui/js/simpleCart.min.js"> </script>
 <!-- slide -->
@@ -250,49 +238,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </body>
 </html>
 
-
-<script type="text/javascript">
-
-    var vue = new Vue({
-        el: '#list',
-        data: {orders: []},
-        methods: {
-            add: function (data) {
-                this.orders = data;
-            }
-        },
-        filters:{
-            time:function (value) {
-
-                function add0(m) {
-                    return m < 10 ? '0' + m : m
-                }
-
-                var time = new Date(parseInt(value));
-                var y = time.getFullYear();
-                var m = time.getMonth() + 1;
-                var d = time.getDate();
-
-                var h = time.getHours();
-                var i = time.getMinutes();
-                var s = time.getSeconds();
-
-                return y + '-' + add0(m) + '-' + add0(d)+ ' '+ add0(h)+ ':'+add0(i)+':'+add0(s);
-            }
-        },
-        mounted:function () {
-            var that = this;
-            $.get('/o/order.do',null,function (data) {
-                that.add(data);
-            },'json')
+<script>
+    $().ready(function(){
+        function getistype(){
+            return ($("#demo1-alipay").is(':checked') ? "1" : "2" );
         }
 
+        $("#demoBtn1").click(function(){
+            $.post(
+                "/pays/pay",
+                {
+                    price : $("#inputprice").val(),
+                    istype : getistype(),
+
+                },
+                function(data){
+                    if (data.code > 0){
+                        $("#goodsname").val(data.data.goodsname);
+                        $("#istype").val(data.data.istype);
+                        $('#key').val(data.data.key);
+                        $('#notify_url').val(data.data.notify_url);
+                        $('#orderid').val(data.data.orderid);
+                        $('#orderuid').val(data.data.orderuid);
+
+                        $('#price').val(data.data.price.toFixed(1));
+                        $('#return_url').val(data.data.return_url);
+                        $('#uid').val(data.data.uid);
+                        $('#formpay').submit();
+
+                    } else {
+                        alert(data.msg);
+                    }
+                }, "json"
+            );
+        });
     });
 
-    function getProduct(id) {
-        $.get('/o/gotProduct',{oid:id.id},function (data) {
-            window.location.href = data.url;
-        },'json')
-    }
 
 </script>
+
+
+

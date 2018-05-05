@@ -89,7 +89,7 @@
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
+                            <li><a class="color6" href="/p/list?type=5">售后</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -98,7 +98,7 @@
             <div class="col-sm-2 search-right">
 
                 <div class="cart box_1">
-                    <a href="checkout.html">
+                    <a href="/c/checkout">
                         <h3>
                             <div class="total">
                                 <span class="simpleCart_total"></span></div>
@@ -168,7 +168,7 @@
                     <div class="quantity">
                         <div class="quantity-select">
                             <div class="entry value-minus">&nbsp;</div>
-                            <div class="entry value"><span>1</span></div>
+                            <div id="number" class="entry value"><span>1</span></div>
                             <div class="entry value-plus active">&nbsp;</div>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                     </script>
                     <!--quantity-->
 
-                    <a href="#" class="add-to item_add hvr-skew-backward">Add to cart</a>
+                    <a id="${requestScope.product.pid}" href="#" onclick="addtocart(this)" class="add-to item_add hvr-skew-backward">Add to cart</a>
                     <div class="clearfix"></div>
                 </div>
 
@@ -347,3 +347,14 @@
 
 </body>
 </html>
+
+<script>
+    function addtocart(obj) {
+        var pid = obj.id;
+        var num = $("#number").text();
+        $.get('/c/add',{pid:pid,number:num},function () {
+            alert("添加到购物车成功");
+        });
+    }
+
+</script>

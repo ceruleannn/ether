@@ -7,7 +7,10 @@
     <class name="edu.wyu.domain.OrderEntity" table="order" schema="os">
         <id name="oid" column="oid"/>
         <property name="date" column="date"/>
-        <property name="price" column="price"/>
+        <property name="phone" column="phone"/>
+        <property name="address" column="address"/>
+        <property name="totalPrice" column="totalPrice"/>
+        <property name="deliverCompany" column="deliverCompany"/>
         <property name="deliverid" column="deliverid"/>
         <property name="status" column="status"/>
         <many-to-one name="user" class="edu.wyu.domain.UserEntity" column="uid"/>

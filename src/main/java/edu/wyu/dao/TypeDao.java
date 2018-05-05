@@ -12,17 +12,6 @@ public class TypeDao extends BaseDao<SysTypeEntity>{
     public List<SysTypeEntity> listAll() {
         return this.list("from SysTypeEntity as t");
     }
-    @Override
-    public SysTypeEntity get(Serializable id) {
 
-        if (id instanceof String){
-            id = Integer.parseInt((String)(id));
-        }
-
-        if (id instanceof Integer){
-            return super.get(id);
-        }
-        return null;
-    }
 
 }

@@ -26,7 +26,33 @@ public class OrderService {
         this.orderDao = orderDao;
     }
 
-    public List<OrderEntity> listByUid(String uid){
+    public List<OrderEntity> listByUid(String uid)
+    {
         return orderDao.listByUid(uid);
+    }
+    public List<OrderEntity> listByStatus(String status){
+
+        return orderDao.listByStatus(status);
+    }
+
+    public void deliver(String oid, String deliverCompany, String deliverid) {
+
+        OrderEntity orderEntity = orderDao.get(oid);
+        orderEntity.setDeliverCompany(deliverCompany);
+        orderEntity.setDeliverid(Integer.parseInt(deliverid));
+        orderEntity.setStatus("待收货");
+
+        orderDao.update(orderEntity);
+
+    }
+
+    public void delete(String oid) {
+
+        orderDao.delete(Integer.parseInt(oid));
+    }
+
+    public void gotProduct(OrderEntity orderEntity) {
+        orderEntity.setStatus("已完成");
+        orderDao.update(orderEntity);
     }
 }

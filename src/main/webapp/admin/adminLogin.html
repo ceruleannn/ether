@@ -61,14 +61,14 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="登录名"  name="登录名">
+															<input id="phone" type="text" class="form-control" placeholder="登录名"  name="登录名">
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" name="密码">
+															<input  id="password" type="password" class="form-control" placeholder="密码" name="密码">
 															<i class="icon-lock"></i>
 														</span>
 													</label>
@@ -121,14 +121,27 @@ $('#login_btn').on('click', function(){
 		 });
 		  if(num>0){  return false;}	 	
           else{
-			  layer.alert('登陆成功！',{
-               title: '提示框',				
-			   icon:1,		
-			  });
-	          location.href="index.html";
-			   layer.close(index);	
-		  }		  		     						
-		
+
+              var phone = $.trim($('#phone').val());
+              var password = $.trim($('#password').val());
+
+              $.post('/u/login.do',{action:'admin',phone:phone,password:password},function (data) {
+				  if (data.code==='201'){
+                      layer.alert('登陆成功！',{
+                          title: '提示框',
+                          icon:1
+                      });
+                      location.href="index.html";
+                      layer.close(index);
+                  } else {
+                      layer.alert('密码错误或权限不足！',{
+                          title: '提示框',
+                          icon:1
+                      });
+				  }
+              },'json');
+
+		  }
 	})
 
 </script>

@@ -22,6 +22,10 @@ public class IndexController {
 
     @RequestMapping("/admin/index")
     public String adminIndex(HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
+
+        if (request.getSession().getAttribute("admin")==null){
+            return "/adminLogin";
+        }
         return "/adminIndex";
     }
 }

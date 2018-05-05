@@ -14,6 +14,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import edu.wyu.domain.SysTypeEntity;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -86,7 +87,16 @@ public class BaseDao<T>{
     }
 
     public T get(Serializable id){
-        return (T) getSession().get(this.getClz(), id);
+
+        if (id instanceof String){
+            id = Integer.parseInt((String)(id));
+        }
+
+        if (id instanceof Integer){
+            return (T) getSession().get(this.getClz(), id);
+        }
+
+        return null;
     }
 
     public List<T> list(String hql, Object... args) {

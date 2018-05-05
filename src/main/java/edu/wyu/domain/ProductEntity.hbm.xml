@@ -6,7 +6,7 @@
 
     <class name="edu.wyu.domain.ProductEntity" table="product" schema="os">
         <id name="pid" column="pid"/>
-        <property name="ison" column="ison"/>
+        <property name="status" column="status"/>
         <property name="date" column="date"/>
         <property name="pic3" column="pic3"/>
         <property name="pic2" column="pic2"/>
@@ -16,10 +16,11 @@
         <property name="detail1" column="detail1"/>
         <property name="overview" column="overview"/>
         <property name="price" column="price"/>
+        <property name="oldprice" column="oldprice"/>
         <property name="name2" column="name2"/>
         <property name="name" column="name"/>
         <property name="sales" column="sales"/>
-        <many-to-one name="brand" class="edu.wyu.domain.SysBrandEntity" column="bid"/>
-        <many-to-one name="type" class="edu.wyu.domain.SysTypeEntity" column="tid"/>
+        <many-to-one name="brand" class="edu.wyu.domain.SysBrandEntity" column="bid" lazy="false"/>
+        <many-to-one name="type" class="edu.wyu.domain.SysTypeEntity" column="tid" lazy="false"/>
     </class>
 </hibernate-mapping>

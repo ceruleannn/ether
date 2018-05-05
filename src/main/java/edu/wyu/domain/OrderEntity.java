@@ -1,5 +1,7 @@
 package edu.wyu.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -15,10 +17,14 @@ import java.util.Set;
 @Table(name = "order", schema = "os", catalog = "")
 public class OrderEntity {
     private Timestamp date;
-    private BigDecimal price;
+    private String phone;
+    private String address;
+    private Double totalPrice;
     private int oid;
+    private String deliverCompany;
     private Integer deliverid;
     private String status;
+
     private Set<OrderDetailEntity> details;
     private UserEntity user;
 
@@ -33,13 +39,33 @@ public class OrderEntity {
     }
 
     @Basic
-    @Column(name = "price")
-    public BigDecimal getPrice() {
-        return price;
+    @Column(name = "phone")
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Basic
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Basic
+    @Column(name = "totalPrice")
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Id
@@ -50,6 +76,16 @@ public class OrderEntity {
 
     public void setOid(int oid) {
         this.oid = oid;
+    }
+
+    @Basic
+    @Column(name = "deliverCompany")
+    public String getDeliverCompany() {
+        return deliverCompany;
+    }
+
+    public void setDeliverCompany(String deliverCompany) {
+        this.deliverCompany = deliverCompany;
     }
 
     @Basic
@@ -72,23 +108,6 @@ public class OrderEntity {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderEntity that = (OrderEntity) o;
-        return oid == that.oid &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(price, that.price) &&
-                Objects.equals(deliverid, that.deliverid) &&
-                Objects.equals(status, that.status);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(date, price, oid, deliverid, status);
-    }
 
     @OneToMany(mappedBy = "order")
     public Set<OrderDetailEntity> getDetails() {

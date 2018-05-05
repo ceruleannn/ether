@@ -1,5 +1,7 @@
 package edu.wyu.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -12,20 +14,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "order_detail", schema = "os", catalog = "")
 public class OrderDetailEntity {
-    private BigDecimal price;
+    private Double price;
     private Integer number;
     private Integer pid;
     private int odid;
     private OrderEntity order;
     private ProductEntity product;
 
-    @Basic
-    @Column(name = "price")
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -68,6 +68,18 @@ public class OrderDetailEntity {
                 Objects.equals(price, that.price) &&
                 Objects.equals(number, that.number) &&
                 Objects.equals(pid, that.pid);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetailEntity{" +
+                "price=" + price +
+                ", number=" + number +
+                ", pid=" + pid +
+                ", odid=" + odid +
+                ", order=" + order +
+                ", product=" + product +
+                '}';
     }
 
     @Override

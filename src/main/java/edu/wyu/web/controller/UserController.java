@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -39,6 +40,7 @@ public class UserController {
 
     @RequestMapping("/sign")
     public String sign(HttpServletRequest request){
+
         return "/register";
     }
 
@@ -54,6 +56,13 @@ public class UserController {
         user.setUsername(request.getParameter("username"));
         user.setPhone(request.getParameter("phone"));
         user.setPassword(request.getParameter("password"));
+        user.setRealname(request.getParameter("realname"));
+        user.setMail(request.getParameter("mail"));
+        user.setAddress(request.getParameter("address"));
+        user.setSex(request.getParameter("sex"));
+        user.setStatus("启用");
+        user.setPermission("用户");
+        user.setDate(new Timestamp(System.currentTimeMillis()));
 
         if (!userService.register(user)){
             return "{\"code\":\"300\"}";
@@ -71,7 +80,7 @@ public class UserController {
     }
 
 
-    @RequestMapping("/login2")
+    @RequestMapping("/login")
     public String login(HttpServletRequest request){
         return "/login";
     }
@@ -85,8 +94,17 @@ public class UserController {
             return "{\"code\":\"400\"}";
         }
         else {
-            request.getSession().setAttribute("user",user);
-            return "{\"code\":\"200\"}";
+            boolean isAdminAction = "admin".equals(request.getParameter("action"));
+            boolean isAdminPermission = "管理员".equals(user.getPermission());
+            if (isAdminAction&&isAdminPermission){
+                request.getSession().setAttribute("admin",user);
+                return "{\"code\":\"201\"}";
+            }
+            else {
+                request.getSession().setAttribute("user",user);
+                return "{\"code\":\"200\"}";
+            }
+
         }
     }
 
@@ -178,17 +196,19 @@ public class UserController {
     private String checkCode(HttpServletRequest request){
         String paramCode = request.getParameter("code");
         if (paramCode==null){
-            return "/404";
+            return null;
         }
 
 
         String sessionCode = (String) request.getSession().getAttribute("code");
 
+        System.out.println(sessionCode);
+        System.out.println(paramCode);
         if (!paramCode.equals(sessionCode)){
-            return "{\"code\":\"400\"}";
+            return null;
         }
 
-        return null;
+        return "ok";
 
     }
 }

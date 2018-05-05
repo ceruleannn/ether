@@ -157,4 +157,21 @@ public class UserEntity {
 
         return Objects.hash(realname, password, phone, uid, status, permission, username, mail, sex, date, address);
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "realname='" + realname + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", uid=" + uid +
+                ", status='" + status + '\'' +
+                ", permission='" + permission + '\'' +
+                ", username='" + username + '\'' +
+                ", mail='" + mail + '\'' +
+                ", sex='" + sex + '\'' +
+                ", date=" + date +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

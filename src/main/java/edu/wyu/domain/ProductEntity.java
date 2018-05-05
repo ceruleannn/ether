@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "product", schema = "os", catalog = "")
 public class ProductEntity {
-    private Boolean ison;
+    private String status;
     private Timestamp date;
     private String pic3;
     private String pic2;
@@ -22,21 +22,22 @@ public class ProductEntity {
     private String detail1;
     private String overview;
     private Double price;
+    private Double oldprice;
     private String name2;
     private String name;
     private int pid;
     private Integer sales;
-    private SysTypeEntity type;
     private SysBrandEntity brand;
+    private SysTypeEntity type;
 
     @Basic
-    @Column(name = "ison")
-    public Boolean getIson() {
-        return ison;
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
     }
 
-    public void setIson(Boolean ison) {
-        this.ison = ison;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Basic
@@ -130,6 +131,16 @@ public class ProductEntity {
     }
 
     @Basic
+    @Column(name = "oldprice")
+    public Double getOldprice() {
+        return oldprice;
+    }
+
+    public void setOldprice(Double oldprice) {
+        this.oldprice = oldprice;
+    }
+
+    @Basic
     @Column(name = "name2")
     public String getName2() {
         return name2;
@@ -175,7 +186,7 @@ public class ProductEntity {
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
         return pid == that.pid &&
-                Objects.equals(ison, that.ison) &&
+                Objects.equals(status, that.status) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(pic3, that.pic3) &&
                 Objects.equals(pic2, that.pic2) &&
@@ -185,6 +196,7 @@ public class ProductEntity {
                 Objects.equals(detail1, that.detail1) &&
                 Objects.equals(overview, that.overview) &&
                 Objects.equals(price, that.price) &&
+                Objects.equals(oldprice, that.oldprice) &&
                 Objects.equals(name2, that.name2) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(sales, that.sales);
@@ -193,7 +205,17 @@ public class ProductEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(ison, date, pic3, pic2, pic1, detail3, detail2, detail1, overview, price, name2, name, pid, sales);
+        return Objects.hash(status, date, pic3, pic2, pic1, detail3, detail2, detail1, overview, price, oldprice, name2, name, pid, sales);
+    }
+
+    @OneToOne
+    @JoinColumn(name = "bid", referencedColumnName = "bid")
+    public SysBrandEntity getBrand() {
+        return brand;
+    }
+
+    public void setBrand(SysBrandEntity brand) {
+        this.brand = brand;
     }
 
     @OneToOne
@@ -206,13 +228,26 @@ public class ProductEntity {
         this.type = type;
     }
 
-    @OneToOne
-    @JoinColumn(name = "bid", referencedColumnName = "bid")
-    public SysBrandEntity getBrand() {
-        return brand;
-    }
-
-    public void setBrand(SysBrandEntity brand) {
-        this.brand = brand;
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "status='" + status + '\'' +
+                ", date=" + date +
+                ", pic3='" + pic3 + '\'' +
+                ", pic2='" + pic2 + '\'' +
+                ", pic1='" + pic1 + '\'' +
+                ", detail3='" + detail3 + '\'' +
+                ", detail2='" + detail2 + '\'' +
+                ", detail1='" + detail1 + '\'' +
+                ", overview='" + overview + '\'' +
+                ", price=" + price +
+                ", oldprice=" + oldprice +
+                ", name2='" + name2 + '\'' +
+                ", name='" + name + '\'' +
+                ", pid=" + pid +
+                ", sales=" + sales +
+                ", brand=" + brand +
+                ", type=" + type +
+                '}';
     }
 }

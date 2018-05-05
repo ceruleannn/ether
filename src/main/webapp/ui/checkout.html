@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Shopin Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndroId Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!--theme-style-->
+    <link href="css/style4.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--//theme-style-->
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+
+</head>
+<body>
+
+<!--header-->
+<div class="header">
+    <div class="container">
+        <div class="head">
+            <div class=" logo">
+                <a href="index.html"><img src="images/logo.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <div class="header-top">
+        <div class="container">
+            <div class="col-sm-5 col-md-offset-2  header-login">
+                <ul>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="head-top">
+
+            <div class="col-sm-8 col-md-offset-2 h_menu4">
+                <nav class="navbar nav_bottom" role="navigation">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header nav_2">
+                        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                                data-target="#bs-megadropdown-tabs">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                        <ul class="nav navbar-nav nav_1">
+                            <li><a class="color" href="index.html">主页</a></li>
+
+                            <li><a class="color3" href="product.html">新闻</a></li>
+                            <li><a class="color4" href="404.html">CPU</a></li>
+                            <li><a class="color3" href="product.html">内存</a></li>
+                            <li><a class="color4" href="404.html">显卡</a></li>
+                            <li><a class="color5" href="typo.html">硬盘</a></li>
+                            <li><a class="color6" href="contact.html">呵呵</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+
+                </nav>
+            </div>
+            <div class="col-sm-2 search-right">
+                <ul class="heart">
+                    <li>
+                        <a href="wishlist.html">
+                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        </a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i
+                            class="glyphicon glyphicon-search"> </i></a></li>
+                </ul>
+                <div class="cart box_1">
+                    <a href="checkout.html">
+                        <h3>
+                            <div class="total">
+                                <span class="simpleCart_total"></span></div>
+                            <img src="images/cart.png" alt=""/></h3>
+                    </a>
+                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--banner-->
+<div class="banner-top">
+    <div class="container">
+        <h1>Checkout</h1>
+        <em></em>
+        <h2><a href="index.html">Home</a><label>/</label>Checkout</a></h2>
+    </div>
+</div>
+
+<div class="container">
+    <div class="check-out">
+        <div class="bs-example4" data-example-id="simple-responsive-table">
+            <div id="list" class="table-responsive">
+                <table class="table-heading simpleCart_shelfItem">
+                    <tr>
+                        <th class="table-grid">宝贝</th>
+
+                        <th>数量</th>
+                        <th>价格</th>
+                        <th>状态</th>
+                        <th>物流</th>
+                    </tr>
+
+                        <template v-for="order in orders" :key="order.oid">
+
+                            <tr v-for="detail in order.details" class="cart-header">
+
+                                <td  class="ring-in"><a href="single.html" class="at-in"><img
+                                        src="../../ui/images/ch.jpg" class="img-responsive" alt=""></a>
+                                    <div class="sed">
+                                        <p>{{order.oid}} &nbsp;&nbsp;&nbsp; - &nbsp; &nbsp;&nbsp;{{order.date}}</p>
+                                        <h5><a href="single.html">{{detail.product.name}}</a></h5>
+
+                                    </div>
+                                    <div sclass="clearfix"></div>
+                                </td>
+                                <td>{{detail.number}}</td>
+                                <td>{{detail.price}}</td>
+                                <td>{{order.status}}</td>
+                                <td class="item_price">{{order.deliverid}}</td>
+
+                           </tr>
+                        </template>
+
+                </table>
+
+
+            </div>
+        </div>
+        <div class="produced">
+            <a href="single.html" class="hvr-skew-backward">Produced To Buy</a>
+        </div>
+    </div>
+</div>
+
+<!--//login-->
+<!--brand-->
+<div class="container">
+    <div class="brand">
+        <div class="col-md-3 brand-grid">
+            <img src="images/ic.png" class="img-responsive" alt="">
+        </div>
+        <div class="col-md-3 brand-grid">
+            <img src="images/ic1.png" class="img-responsive" alt="">
+        </div>
+        <div class="col-md-3 brand-grid">
+            <img src="images/ic2.png" class="img-responsive" alt="">
+        </div>
+        <div class="col-md-3 brand-grid">
+            <img src="images/ic3.png" class="img-responsive" alt="">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!--//brand-->
+</div>
+
+</div>
+<!--//content-->
+<!--//footer-->
+<div class="footer">
+    <div class="footer-middle">
+        <div class="container">
+            <div class="col-md-3 footer-middle-in">
+                <a href="index.html"><img src="images/log.png" alt=""></a>
+                <p>Suspendisse sed accumsan risus. Curabitur rhoncus, elit vel tincidunt elementum, nunc urna tristique
+                    nisi, in interdum libero magna tristique ante. adipiscing varius. Vestibulum dolor lorem.</p>
+            </div>
+
+            <div class="col-md-3 footer-middle-in">
+                <h6>Information</h6>
+                <ul class=" in">
+                    <li><a href="404.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="contact.html">Site Map</a></li>
+                </ul>
+                <ul class="in in1">
+                    <li><a href="#">Order History</a></li>
+                    <li><a href="wishlist.html">Wish List</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-3 footer-middle-in">
+                <h6>Tags</h6>
+                <ul class="tag-in">
+                    <li><a href="#">Lorem</a></li>
+                    <li><a href="#">Sed</a></li>
+                    <li><a href="#">Ipsum</a></li>
+                    <li><a href="#">Contrary</a></li>
+                    <li><a href="#">Chunk</a></li>
+                    <li><a href="#">Amet</a></li>
+                    <li><a href="#">Omnis</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-middle-in">
+                <h6>Newsletter</h6>
+                <span>Sign up for News Letter</span>
+                <form>
+                    <input type="text" value="Enter your E-mail" onfocus="this.value='';"
+                           onblur="if (this.value == '') {this.value ='Enter your E-mail';}">
+                    <input type="submit" value="Subscribe">
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/simpleCart.min.js"></script>
+<!-- slide -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+
+    function ajaxJson(url, method, data, possessMethod) {
+        $.ajax({
+            url: url,
+            type: method,
+            data: data,
+            dataType: 'JSON',
+            success: function (data) {
+                possessMethod(data);
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+    var process = function () {
+
+    }
+
+
+    var vue = new Vue({
+        el: '#list',
+        data: {orders: []},
+        methods: {
+            add: function (data) {
+                this.orders = data;
+            }
+        },
+        mounted: function () {
+            var data2 = "[{\"date\":1523635264000,\"deliverid\":123,\"details\":[{\"number\":1,\"odid\":1,\"order\":{\"$ref\":\"$[0]\"},\"pid\":1,\"price\":10.00,\"product\":{\"brand\":{\"bid\":2,\"name\":\"华硕\"},\"date\":1522221198000,\"detail1\":\"商品名称：华硕ROG STRIX-GTX1080-A8G-GAMING 1670-1835MHz 8G/10010MHz GDDR5 PCI-E3.0显卡商品编号：3340788商品毛重：1.79kg商品产地：中国大陆游戏特色：华硕ROG STRIXNVIDIA芯片：GTX1080显存容量：8G游戏性能：骨灰级性能：发烧\",\"detail2\":\"品牌\\r\\n华硕 ASUS\\r\\n型号\\r\\nROG STRIX-GTX1080-A8G-GAMING\\r\\n接口类型\\r\\nPCI-E 3.0\\r\\n核心\\r\\n核心品牌\\r\\nNVIDIA\\r\\n核心型号\\r\\nGeForce GTX 1080\\r\\n核心频率\\r\\n超频模式 - GPU 动态提速频率： 1835 MHZ , GPU 基础频率： 1695 MHz 游戏模式(默认) - GPU 动态提速频率： 1809 MHZ , GPU 基础频率： 1670 MHz\\r\\n流处理单元\\r\\n2560\\r\\n显存\\r\\n显存类型\\r\\nGDDR5X\\r\\n显存容量\\r\\n8G\\r\\n显存位宽\\r\\n256-bit\\r\\n显存频率\\r\\n10010 MHz\\r\\n3D API\\r\\nOpenGL\\r\\nOpenGL?4.5\\r\\n接口\\r\\nDVI接口\\r\\n1个\\r\\nHDMI接口\\r\\n2x Native HDMI 2.0\\r\\nDP接口\\r\\n2x Native DisplayPort 1.4\\r\\n规格\\r\\n最大分辨率\\r\\n7680 x 4320\\r\\nSLI\\r\\n支持\\r\\nHDCP\\r\\n支持\\r\\n电源接口\\r\\n8pin+6pin\\r\\n特性\\r\\n尺寸\\r\\n29.8 x 13.4 x 4 cm\\r\\n特性\\r\\nASUS GPU Tweak II & Driver\\r\\n包装清单\\r\\n显卡× 1；驱动光盘 × 1；；包装盒× 1；包装内胆× 1；简易安装说明 × 1；束线扣；Power Cabel\",\"detail3\":\"京东平台卖家销售并发货的商品，由平台卖家提供发票和相应的售后服务。请您放心购买！\\r\\n注：因厂家会在没有任何提前通知的情况下更改产品包装、产地或者一些附件，本司不能确保客户收到的货物与商城图片、产地、附件说明完全一致。只能确保为原厂正货！并且保证与当时市场上同样主流新品一致。若本商城没有及时更新，请大家谅解！\",\"ison\":true,\"name\":\"华硕（ASUS）ROG STRIX-GeForce GTX1080-A8G-GAMING \",\"name2\":\"1670-1835MHz 10010MHz猛禽发烧级专业电竞“吃鸡”显卡\",\"overview\":\"品牌： 华硕（ASUS）\\r\\n商品名称：华硕ROG STRIX-GTX1080-A8G-GAMING 1670-1835MHz 8G/10010MHz GDDR5 PCI-E3.0显卡商品编号：3340788商品毛重：1.79kg商品产地：中国大陆游戏特色：华硕ROG STRIXNVIDIA芯片：GTX1080显存容量：8G游戏性能：骨灰级性能：发烧\",\"pid\":1,\"price\":5200,\"sales\":2321,\"type\":{\"name\":\"显卡\",\"tid\":2}}},{\"number\":2,\"odid\":2,\"order\":{\"$ref\":\"$[0]\"},\"pid\":2,\"price\":2000.00,\"product\":{\"brand\":{\"bid\":5,\"name\":\"英特尔\"},\"date\":1522221199000,\"detail1\":\"只换不修\\r\\n1. 在天猫电器购买带有“只换不修”标识的商品后，商品主体出现国家“三包”范围内或厂家保修服务范围内的质量问题（指“非人为损坏”问题），同时符合服务履行标准的，则商家承诺向买家提供一次免费更换全新商品的服务。其中，商品主体与配件的区分以商品说明书为准。\\r\\n2. 商家应履行只换不修服务但未履行的，商家需以发放天猫积分方式赔付消费者，发放天猫积分数量（个）=商品实际成交金额（元）*30（个/元），最高不超过5万个天猫积分。商家向买家发放天猫积分后，该未履行只换不修服务的情形，不再属于《天猫规则》中违背承诺的投诉受理范围。\",\"detail2\":\"只换不修\\r\\n1. 在天猫电器购买带有“只换不修”标识的商品后，商品主体出现国家“三包”范围内或厂家保修服务范围内的质量问题（指“非人为损坏”问题），同时符合服务履行标准的，则商家承诺向买家提供一次免费更换全新商品的服务。其中，商品主体与配件的区分以商品说明书为准。\\r\\n2. 商家应履行只换不修服务但未履行的，商家需以发放天猫积分方式赔付消费者，发放天猫积分数量（个）=商品实际成交金额（元）*30（个/元），最高不超过5万个天猫积分。商家向买家发放天猫积分后，该未履行只换不修服务的情形，不再属于《天猫规则》中违背承诺的投诉受理范围。\",\"detail3\":\"只换不修\\r\\n1.在天猫电器购买带有“只换不修”标识的商品后，商品主体出现质量问题，同时符合服务履行标准的，则商家承诺向买家提供一次免费更换全新商品的服务。\\r\\n2.商家应履行只换不修服务但未履行的，商家需以发放天猫积分方式赔付消费者，发放天猫积分数量（个）=商品实际成交金额（元）*30（个/元），最高不超过5万个天猫积分。\",\"ison\":true,\"name\":\"Intel/英特尔 I7 7700K 酷睿i7四核处理器 台式机电脑盒装CPU\",\"name2\":\"Intel/英特尔 I7 7700K 酷睿i7四核处理器 台式机电脑盒装CPU\\r\\n游戏大师推荐 轻松畅玩吃鸡\",\"overview\":\"品牌名称：Intel/英特尔\\r\\n产品参数：\\r\\n产品名称：Intel/英特尔 I7 7700K套餐类型: 官方标配生产企业: intel适用对象: 台式机核心数: 四核心品牌: Intel/英特尔Intel型号: I7 7700KCPU主频: 4.2GHz接口类型: intel LGA 1151包装种类: 原包芯片制程: 14nm成色: 全新\",\"pid\":2,\"price\":2319.3,\"sales\":5544,\"type\":{\"name\":\"CPU\",\"tid\":1}}}],\"oid\":1,\"price\":1080.00,\"status\":\"ssss\",\"user\":{\"password\":\"777777\",\"phone\":\"18219111805\",\"uid\":7,\"username\":\"pqqqqqq\"}},{\"$ref\":\"$[0]\"},{\"date\":1523635266000,\"deliverid\":22,\"details\":[{\"number\":1,\"odid\":4,\"order\":{\"$ref\":\"$[2]\"},\"pid\":1,\"price\":1144.00,\"product\":{\"brand\":{\"$ref\":\"$[0].details[0].product.brand\"},\"date\":1522221203000,\"detail1\":\"商品名称：华硕ROG STRIX-GTX1080-A8G-GAMING 1670-1835MHz 8G/10010MHz GDDR5 PCI-E3.0显卡商品编号：3340788商品毛重：1.79kg商品产地：中国大陆游戏特色：华硕ROG STRIXNVIDIA芯片：GTX1080显存容量：8G游戏性能：骨灰级性能：发烧\",\"detail2\":\"品牌\\r\\n华硕 ASUS\\r\\n型号\\r\\nROG STRIX-GTX1080-A8G-GAMING\\r\\n接口类型\\r\\nPCI-E 3.0\\r\\n核心\\r\\n核心品牌\\r\\nNVIDIA\\r\\n核心型号\\r\\nGeForce GTX 1080\\r\\n核心频率\\r\\n超频模式 - GPU 动态提速频率： 1835 MHZ , GPU 基础频率： 1695 MHz 游戏模式(默认) - GPU 动态提速频率： 1809 MHZ , GPU 基础频率： 1670 MHz\\r\\n流处理单元\\r\\n2560\\r\\n显存\\r\\n显存类型\\r\\nGDDR5X\\r\\n显存容量\\r\\n8G\\r\\n显存位宽\\r\\n256-bit\\r\\n显存频率\\r\\n10010 MHz\\r\\n3D API\\r\\nOpenGL\\r\\nOpenGL?4.5\\r\\n接口\\r\\nDVI接口\\r\\n1个\\r\\nHDMI接口\\r\\n2x Native HDMI 2.0\\r\\nDP接口\\r\\n2x Native DisplayPort 1.4\\r\\n规格\\r\\n最大分辨率\\r\\n7680 x 4320\\r\\nSLI\\r\\n支持\\r\\nHDCP\\r\\n支持\\r\\n电源接口\\r\\n8pin+6pin\\r\\n特性\\r\\n尺寸\\r\\n29.8 x 13.4 x 4 cm\\r\\n特性\\r\\nASUS GPU Tweak II & Driver\\r\\n包装清单\\r\\n显卡× 1；驱动光盘 × 1；；包装盒× 1；包装内胆× 1；简易安装说明 × 1；束线扣；Power Cabel\",\"detail3\":\"京东平台卖家销售并发货的商品，由平台卖家提供发票和相应的售后服务。请您放心购买！\\r\\n注：因厂家会在没有任何提前通知的情况下更改产品包装、产地或者一些附件，本司不能确保客户收到的货物与商城图片、产地、附件说明完全一致。只能确保为原厂正货！并且保证与当时市场上同样主流新品一致。若本商城没有及时更新，请大家谅解！\",\"ison\":true,\"name\":\"华硕（ASUS）ROG STRIX-GeForce GTX980\",\"name2\":\"1670-1835MHz 10010MHz猛禽发烧级专业电竞“吃鸡”显卡\",\"overview\":\"品牌： 华硕（ASUS）\\r\\n商品名称：华硕ROG STRIX-GTX1080-A8G-GAMING 1670-1835MHz 8G/10010MHz GDDR5 PCI-E3.0显卡商品编号：3340788商品毛重：1.79kg商品产地：中国大陆游戏特色：华硕ROG STRIXNVIDIA芯片：GTX1080显存容量：8G游戏性能：骨灰级性能：发烧\",\"pid\":4,\"price\":4411,\"sales\":11112,\"type\":{\"$ref\":\"$[0].details[0].product.type\"}}},{\"number\":1,\"odid\":3,\"order\":{\"$ref\":\"$[2]\"},\"pid\":2,\"price\":4441.00,\"product\":{\"brand\":{\"bid\":4,\"name\":\"浦科特\"},\"date\":1522221202000,\"detail1\":\"主体\\r\\n系列\\r\\nM8V\\r\\n型号\\r\\nPX-256M8VC\\r\\n类别\\r\\n2.5英寸SSD固态硬盘\\r\\n规格\\r\\n接口类型\\r\\nSATA 3.0\\r\\n容量\\r\\n256GB\\r\\n缓存\\r\\n512MB\\r\\n读写速度\\r\\n持续读取达560 MB/s，持续写入达510MB/s；随机读取高达81,000 IOPS,随机写入高达80,000 IOPS\\r\\n主控\\r\\nSMI\\r\\n颗粒\\r\\nTOSHIBA BiCS3 3D NAND\\r\\n特性\\r\\n尺寸\\r\\n100 x 69.85 x 6.8 mm\\r\\n工作温度\\r\\n0C ~ 70C\\r\\nTRIM\\r\\n支持\\r\\n包装清单\\r\\n固态硬盘*1\",\"detail2\":\"厂家服务\\r\\n本产品全国联保，享受三包服务，质保期为：三年质保\\r\\n您可以查询本品牌在各地售后服务中心的联系方式，请点击这儿查询......\\r\\n\\r\\n品牌官方网站：http://www.goplextor.com/cn\",\"detail3\":\"凭质保证书及京东商城发票，可享受全国联保服务（奢侈品、钟表除外；奢侈品、钟表由京东联系保修，享受法定三包售后服务），与您亲临商场选购的商品享受相同的质量保证。京东商城还为您提供具有竞争力的商品价格和运费政策，请您放心购买！ \\r\\n\\r\\n注：因厂家会在没有任何提前通知的情况下更改产品包装、产地或者一些附件，本司不能确保客户收到的货物与商城图片、产地、附件说明完全一致。只能确保为原厂正货！并且保证与当时市场上同样主流新品一致。若本商城没有及时更新，请大家谅解！\",\"ison\":true,\"name\":\"浦科特（PLEXTOR）M8VC 256G SATA3固态硬盘\",\"name2\":\"【冰点秒杀】旗舰M9Pe震撼来袭，原厂3D颗粒，Marvell主控 NVMe SSD\",\"overview\":\"品牌： 浦科特（PLEXTOR）\\r\\n商品名称：浦科特M8VC系列 256G 2.5英寸 SATA-3固态硬盘(PX-256M8VC)商品编号：6233641商品毛重：75.00g商品产地：中国台湾接口：SATA接口游戏性能：发烧级容量：(240-256)GB类别：游戏发烧型，移动SSD\",\"pid\":3,\"price\":589,\"sales\":220011,\"type\":{\"name\":\"固态硬盘\",\"tid\":5}}}],\"oid\":2,\"price\":22.50,\"status\":\"1\",\"user\":{\"$ref\":\"$[0].user\"}},{\"$ref\":\"$[2]\"}]";
+            this.orders = eval(data2);
+        }
+    });
+
+
+
+
+
+</script>

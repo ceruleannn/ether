@@ -62,15 +62,5 @@ public class UserDao extends BaseDao<UserEntity>{
         return null;
     }
 
-    @Override
-    public UserEntity get(Serializable id) {
-        if (id instanceof String){
-            id = Integer.parseInt((String)(id));
-        }
 
-        if (id instanceof Integer){
-            return super.get(id);
-        }
-        return null;
-    }
 }

@@ -28,7 +28,7 @@ $(document).ready(function () {
         var password = $.trim($('#password').val());
 
         var data = 'phone='+phone+'&password='+password;
-        ajaxJson('http://localhost:8888'+'/u/login.do','GET',data,processLogin);
+        ajaxJson('/u/login.do','GET',data,processLogin);
 
     });
 
