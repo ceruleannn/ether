@@ -88,12 +88,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="nav navbar-nav nav_1">
                             <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
                             <li><a class="color4" href="/p/list?type=1">CPU</a></li>
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
+                            <li><a class="color6" href="/p/list?type=5"></a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -144,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <tr v-for="detail in details" class="cart-header">
 
                             <td  class="ring-in"><a :href="'/p/detail/'+detail.product.pid" class="at-in"><img
-                                    src="../../ui/images/ch.jpg" class="img-responsive" alt=""></a>
+                                    :src="detail.product.pic1" class="img-responsive" alt=""></a>
                                 <div class="sed">
                                     <h5><a :href="'/p/detail/'+detail.product.pid">{{detail.product.name}}</a></h5>
 
@@ -152,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div sclass="clearfix"></div>
                             </td>
                             <td>{{detail.number}}</td>
-                            <td>{{detail.price}}</td>
+                            <td name="price">{{detail.price}}</td>
                             <td ><button :id="detail.product.pid" onclick="remove(this)" class="btn btn-default"> 移除 </button></td>
 
                         </tr>
@@ -160,7 +160,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <div class="produced">
-            <a href="single.html" class="hvr-skew-backward">Produced To Buy</a>
+            <a id="demoBtn1" href="javascript:void(0)" class="hvr-skew-backward">Produced To Buy</a>
+
+            <form style='display:none;' id='formpay' name='formpay' method='post' action='https://pay.paysapi.com'>
+                <input name='goodsname' id='goodsname' type='text' value='1' />
+                <input name='istype' id='istype' type='text' value='' />
+                <input name='key' id='key' type='text' value=''/>
+                <input name='notify_url' id='notify_url' type='text' value=''/>
+                <input name='orderid' id='orderid' type='text' value=''/>
+                <input name='orderuid' id='orderuid' type='text' value=''/>
+                <input name='price' id='price' type='text' value=''/>
+                <input name='return_url' id='return_url' type='text' value=''/>
+                <input name='uid' id='uid' type='text' value=''/>
+                <input type='submit' id='submitdemo1'>
+            </form>
         </div>
     </div>
 </div>
@@ -272,5 +285,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             window.location.href = '/c/checkout';
         },'json')
     }
+
+</script>
+
+<script>
+    $().ready(function(){
+
+        $("#demoBtn1").click(function(){
+
+            var sum = 0;
+            $ ("td[name='price']").each (function (j, dom)
+            {
+                sum += parseFloat ($ (this).text ());
+            });
+
+            $.post(
+                "/pays/pay",
+                {
+                    price : sum,
+                    istype : 1
+                },
+                function(data){
+                    if (data.code > 0){
+                        $("#goodsname").val(data.data.goodsname);
+                        $("#istype").val(data.data.istype);
+                        $('#key').val(data.data.key);
+                        $('#notify_url').val(data.data.notify_url);
+                        $('#orderid').val(data.data.orderid);
+                        $('#orderuid').val(data.data.orderuid);
+
+                        $('#price').val((data.data.price).toFixed(1));
+                        $('#return_url').val(data.data.return_url);
+                        $('#uid').val(data.data.uid);
+                        $('#formpay').submit();
+
+                    } else {
+                        alert(data.msg);
+                    }
+                }, "json"
+            );
+        });
+    });
+
 
 </script>

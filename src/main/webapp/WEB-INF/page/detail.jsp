@@ -84,12 +84,13 @@
                         <ul class="nav navbar-nav nav_1">
                             <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
+
                             <li><a class="color4" href="/p/list?type=1">CPU</a></li>
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">售后</a></li>
+                            <li><a class="color6" href="/p/list?type=5"></a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -129,16 +130,16 @@
             <div class="col-md-5 grid">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li data-thumb="../../ui/images/si.jpg">
-                            <div class="thumb-image"><img src="../../ui/images/si.jpg" data-imagezoom="true"
+                        <li data-thumb="${requestScope.product.pic1}">
+                            <div class="thumb-image"><img src="${requestScope.product.pic1}" data-imagezoom="true"
                                                           class="img-responsive"></div>
                         </li>
-                        <li data-thumb="../../ui/images/si1.jpg">
-                            <div class="thumb-image"><img src="../../ui/images/si1.jpg" data-imagezoom="true"
+                        <li data-thumb="${requestScope.product.pic2}">
+                            <div class="thumb-image"><img src="${requestScope.product.pic2}" data-imagezoom="true"
                                                           class="img-responsive"></div>
                         </li>
-                        <li data-thumb="../../ui/images/si2.jpg">
-                            <div class="thumb-image"><img src="../../ui/images/si2.jpg" data-imagezoom="true"
+                        <li data-thumb="${requestScope.product.pic3}">
+                            <div class="thumb-image"><img src="${requestScope.product.pic3}" data-imagezoom="true"
                                                           class="img-responsive"></div>
                         </li>
                     </ul>
@@ -221,23 +222,7 @@
 
                         <div class="facts">
                             <p> ${requestScope.product.detail3} </p>
-                            <ul>
-                                <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Research</li>
-                                <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Design and
-                                    Development
-                                </li>
-                                <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Porting and
-                                    Optimization
-                                </li>
-                                <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>System integration
-                                </li>
-                                <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Verification,
-                                    Validation and Testing
-                                </li>
-                                <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Maintenance and
-                                    Support
-                                </li>
-                            </ul>
+
                         </div>
 
                     </div>

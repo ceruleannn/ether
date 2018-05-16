@@ -80,12 +80,13 @@
                         <ul class="nav navbar-nav nav_1">
                             <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
+
                             <li><a class="color4" href="/p/list?type=1">CPU</a></li>
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">售后</a></li>
+                            <li><a class="color6" href="/p/list?type=5"></a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -138,20 +139,6 @@
         <button type="button" id="demoBtn1">确认购买</button>
     </form>
 
-
-
-    <form style='display:none;' id='formpay' name='formpay' method='post' action='https://pay.paysapi.com'>
-        <input name='goodsname' id='goodsname' type='text' value='1' />
-        <input name='istype' id='istype' type='text' value='' />
-        <input name='key' id='key' type='text' value=''/>
-        <input name='notify_url' id='notify_url' type='text' value=''/>
-        <input name='orderid' id='orderid' type='text' value=''/>
-        <input name='orderuid' id='orderuid' type='text' value=''/>
-        <input name='price' id='price' type='text' value=''/>
-        <input name='return_url' id='return_url' type='text' value=''/>
-        <input name='uid' id='uid' type='text' value=''/>
-        <input type='submit' id='submitdemo1'>
-    </form>
 
 
 </div>
@@ -249,7 +236,7 @@
                 "/pays/pay",
                 {
                     price : $("#inputprice").val(),
-                    istype : getistype(),
+                    istype : getistype()
 
                 },
                 function(data){

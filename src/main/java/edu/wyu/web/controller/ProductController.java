@@ -48,8 +48,6 @@ public class ProductController {
         if (product==null){
             return "/404";
         }
-        System.out.println(product.getDetail1());
-
         request.setAttribute("product", product);
         return "/detail";
     }
@@ -106,33 +104,27 @@ public class ProductController {
 
         Object obj = request.getSession().getAttribute("imgs");
         try {
+            ArrayList<byte[]> list;
             if (obj!=null && obj instanceof ArrayList){
-                @SuppressWarnings("unchecked")
-                ArrayList<byte[]> list = (ArrayList<byte[]>) obj;
-                for (MultipartFile file : files) {
-                    if (file!=null){
-                        byte[] bytes = file.getBytes();
-                        list.add(bytes);
-                    }
-                }
+                list = (ArrayList<byte[]>) obj;
+
             }else {
-                ArrayList<byte[]> list = new ArrayList<>();
-                for (MultipartFile file : files) {
-                    if (file!=null){
-                        byte[] bytes = file.getBytes();
-                        list.add(bytes);
-                    }
-                }
+                list = new ArrayList<>();
                 request.getSession().setAttribute("imgs",list);
-
             }
-
+            for (MultipartFile file : files) {
+                if (file!=null){
+                    byte[] bytes = file.getBytes();
+                    list.add(bytes);
+                }
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
+            return "{\"status\":500}";
         }
 
-        return "{\"status\":1}";
+        return "{\"status\":200}";
     }
 
 

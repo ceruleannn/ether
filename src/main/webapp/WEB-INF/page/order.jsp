@@ -88,12 +88,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="nav navbar-nav nav_1">
                             <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
+
                             <li><a class="color4" href="/p/list?type=1">CPU</a></li>
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">呵呵</a></li>
+                            <li><a class="color6" href="/p/list?type=5"></a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -146,7 +147,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <tr v-for="detail in order.details" class="cart-header">
 
                             <td  class="ring-in"><a :href="'/p/detail/'+detail.product.pid" class="at-in"><img
-                                    src="../../ui/images/ch.jpg" class="img-responsive" alt=""></a>
+                                    :src="detail.product.pic1" class="img-responsive" alt=""></a>
                                 <div class="sed">
                                     <p>订单号: {{order.oid}} &nbsp;&nbsp;&nbsp; - &nbsp; &nbsp;&nbsp;{{ order.date | time }}</p>
                                     <h5><a :href="'/p/detail/'+detail.product.pid">{{detail.product.name}}</a></h5>

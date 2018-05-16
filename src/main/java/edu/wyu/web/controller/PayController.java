@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/pays")
 public class PayController {
 
-    @RequestMapping("/payhmtl")
+    @RequestMapping("/payhtml")
     public String payhmtl(HttpServletRequest request, float price, int istype) {
 
         return "/pay";

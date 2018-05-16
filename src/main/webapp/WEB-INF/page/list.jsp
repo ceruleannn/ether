@@ -87,12 +87,13 @@
                         <ul class="nav navbar-nav nav_1">
                             <li><a class="color" href="/index">主页</a></li>
 
-                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
                             <li><a class="color4" href="/p/list?type=1">CPU</a></li>
                             <li><a class="color3" href="/p/list?type=3">内存</a></li>
                             <li><a class="color4" href="/p/list?type=2">显卡</a></li>
                             <li><a class="color5" href="/p/list?type=4">硬盘</a></li>
-                            <li><a class="color6" href="/p/list?type=5">售后</a></li>
+                            <li><a class="color6" href="/p/list?type=5"></a></li>
+                            <li><a class="color3" href="/p/list?type=1">新闻</a></li>
+
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -136,9 +137,9 @@
                     <div class="col-md-4 item-grid1 simpleCart_shelfItem">
                         <div class=" mid-pop">
                             <div class="pro-img">
-                                <img src="../../ui/images/pc.jpg" class="img-responsive" alt="">
+                                <img :src="product.pic1" class="img-responsive" alt="">
                                 <div class="zoom-icon ">
-                                    <a class="picture" href="../../ui/images/pc.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
+                                    <a class="picture" :href="product.pic1" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
                                     <a v-bind:href="'/p/detail/' + product.pid"><i class="glyphicon glyphicon-menu-right icon"></i></a>
                                 </div>
                             </div>
