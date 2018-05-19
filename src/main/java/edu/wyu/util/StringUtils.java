@@ -30,5 +30,9 @@ public class StringUtils {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         return pattern.matcher(str).matches();
     }
+
+    public static boolean notEmpty(String string){
+        return string!=null&&string.length()>0;
+    }
 }
 

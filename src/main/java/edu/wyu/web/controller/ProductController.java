@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import edu.wyu.domain.ProductEntity;
 import edu.wyu.domain.SysBrandEntity;
 import edu.wyu.domain.SysTypeEntity;
+import edu.wyu.service.BrandService;
 import edu.wyu.service.ProductService;
+import edu.wyu.service.TypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,28 @@ public class ProductController {
         this.productService = productService;
     }
 
+    private BrandService brandService;
+
+    private TypeService typeService;
+
+    public BrandService getBrandService() {
+        return brandService;
+    }
+
+    @Inject
+    public void setBrandService(BrandService brandService) {
+        this.brandService = brandService;
+    }
+
+    public TypeService getTypeService() {
+        return typeService;
+    }
+
+    @Inject
+    public void setTypeService(TypeService typeService) {
+        this.typeService = typeService;
+    }
+
     @RequestMapping("/detail/{id}")
     public String detail(@PathVariable("id") String id, HttpServletRequest request){
         ProductEntity product = productService.getProductByID(Integer.parseInt(id));
@@ -55,12 +79,19 @@ public class ProductController {
     @RequestMapping("/list")
     public String list(HttpServletRequest request){
 
-        String type = request.getParameter("type");
-        if (type!=null){
-            request.setAttribute("type",Integer.parseInt(type));
-            return "/list";
-        }
-        return "/404";
+        return "/list";
+
+    }
+
+    @RequestMapping("/iframe")
+    public String iframe(HttpServletRequest request){
+
+        List<SysBrandEntity> brands = brandService.list();
+        List<SysTypeEntity> types = typeService.list();
+        request.setAttribute("brands",brands);
+        request.setAttribute("types",types);
+        return "/iframe";
+
     }
 
     @RequestMapping("/list.do")
@@ -90,8 +121,13 @@ public class ProductController {
             return "{\"data\":"+JSON.toJSONString(adminBeans)+"}";
 
         }else {
+            String price1 = request.getParameter("price1");
+            String price2 = request.getParameter("price2");
+
             String order = request.getParameter("order");
-            List<ProductEntity> products = productService.list(tid,bid,order);
+            String limit = request.getParameter("limit");
+
+            List<ProductEntity> products = productService.list(tid,bid,order,price1,price2,limit);
 
             return  JSON.toJSONString(products);
         }

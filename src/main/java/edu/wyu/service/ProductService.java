@@ -89,4 +89,8 @@ public class ProductService {
             e.printStackTrace();
         }
     }
+
+    public List<ProductEntity> list(String tid, String bid, String order, String price1, String price2, String limit) {
+        return productDao.productList(tid,bid,order,price1,price2,limit);
+    }
 }
